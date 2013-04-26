@@ -64,15 +64,17 @@ class SyntacticTreeKernel(TreeKernel):
                         product_children_delta *= (1 + child_delta)
                 delta_matrix[node2id1[node1],node2id2[node2]] = product_children_delta
                 
+def test():
+    print "hello"
+    syntactic_tree1 = SyntacticTree.read_tree("VP (VBZ kill) (NP (N man))")
+    syntactic_tree2 = SyntacticTree.read_tree("VP (VBZ murder) (NP (N man))")
+    kernel = SyntacticTreeKernel(1.0)
+    print syntactic_tree1
+    print syntactic_tree2
+    print [node._label for node in syntactic_tree1.get_nodes()] 
+    print [node._label for node in syntactic_tree2.get_nodes()]
+    print "kernel:\n", kernel.dot_product(syntactic_tree1, syntactic_tree1)   
+    print "kernel:\n", kernel.dot_product(syntactic_tree1, syntactic_tree2)              
 
-print "hello"
-syntactic_tree1 = SyntacticTree.read_tree("VP (VBZ kill) (NP (N man))")
-syntactic_tree2 = SyntacticTree.read_tree("VP (VBZ murder) (NP (N man))")
-kernel = SyntacticTreeKernel(1.0)
-print syntactic_tree1
-print syntactic_tree2
-print [node._label for node in syntactic_tree1.get_nodes()] 
-print [node._label for node in syntactic_tree2.get_nodes()]
-print "kernel:\n", kernel.dot_product(syntactic_tree1, syntactic_tree1)   
-print "kernel:\n", kernel.dot_product(syntactic_tree1, syntactic_tree2)              
-        
+if __name__ == '__main__':
+    test()
