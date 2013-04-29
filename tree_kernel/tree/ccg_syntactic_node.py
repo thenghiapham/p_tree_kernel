@@ -15,4 +15,5 @@ class VectorSyntacticNode(SyntacticNode):
         '''
         Constructor
         '''
-        pass
+        self._phrase = phrase
+        super(VectorSyntacticNode, self).__init__(label)
