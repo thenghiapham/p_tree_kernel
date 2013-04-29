@@ -39,7 +39,7 @@ class SyntacticTreeKernel(TreeKernel):
         for node1 in all_nodes1:
             for node2 in all_nodes2:
                 self._delta(node1, node2, node2id1, node2id2, delta_matrix)
-        print delta_matrix
+        #print delta_matrix
         return delta_matrix.sum()
     
     def _delta(self, node1, node2, node2id1, node2id2, delta_matrix):
