@@ -9,9 +9,9 @@ from utils.type_utils import assert_type
 from tree.semantic_tree import SemanticTree
 from tree.syntactic_node import SyntacticNode
 
-class CollapsedCompositionalTreeKernel(SyntacticTreeKernel):
+class MixedCompositionalTreeKernel(SyntacticTreeKernel):
     '''
-    Mixed Salad Kernel 2
+    Mixed Salad Kernel 2 variation
     '''
 
 
@@ -26,7 +26,7 @@ class CollapsedCompositionalTreeKernel(SyntacticTreeKernel):
     def dot_product(self, tree1, tree2):
         assert_type(tree1, SemanticTree)
         assert_type(tree1, SemanticTree)
-        return super(CollapsedCompositionalTreeKernel, self).dot_product(tree1, tree2)
+        return super(MixedCompositionalTreeKernel, self).dot_product(tree1, tree2)
     
     # new delta
     def _delta(self, node1, node2, node2id1, node2id2, delta_matrix):
@@ -41,8 +41,7 @@ class CollapsedCompositionalTreeKernel(SyntacticTreeKernel):
                 if node1._label != node2._label:
                     delta_matrix[node2id1[node1],node2id2[node2]] = 0
                 else:
-                    delta_matrix[node2id1[node1],node2id2[node2]] = ((self._lambda ** (max(node1.get_depth(),node2.get_depth()) - 1)) * 
-                                                                     self._measure.get_sim(node1._vector, node2._vector))
+                    delta_matrix[node2id1[node1],node2id2[node2]] = self._measure.get_sim(node1._vector, node2._vector)
             else:
                 product_children_delta = self._lambda 
                 for i in xrange(len(node1._children)):
@@ -61,9 +60,8 @@ class CollapsedCompositionalTreeKernel(SyntacticTreeKernel):
                     sim_children_product *= self._measure.get_sim(child1._vector, child2._vector)
                     
                 final_delta = (product_children_delta + 
-                               ((self._lambda ** (max(node1.get_depth(),node2.get_depth()) - 1)) * 
-                                (self._measure.get_sim(node1._vector, node2._vector) - 
-                                 sim_children_product)))
+                               (self._measure.get_sim(node1._vector, node2._vector) - 
+                                 self._lambda * sim_children_product))
                  
                 delta_matrix[node2id1[node1],node2id2[node2]] = final_delta
         
