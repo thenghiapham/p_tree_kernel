@@ -59,8 +59,16 @@ class SyntacticNode(Node):
             child_string = ""
             for child in self._children:
                 child_string = child_string + " " + str(child)
-            return "(%s%s)" %(self._label, child_string) 
+            return "(%s%s)" %(self._label, child_string)
     
+    def get_depth(self):
+        if self._children: 
+            depth = 0
+            for child in self._children:
+                depth = max(depth, child.get_depth())
+            return depth + 1
+        else:
+            return 0
     def get_label(self):
         return self._label
         

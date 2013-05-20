@@ -13,13 +13,14 @@ class SemanticNode(SyntacticNode):
     '''
 
 
-    def __init__(self, label, vector):
+    def __init__(self, label, vector, node_type=SyntacticNode.NON_TERMINAL):
         '''
         Constructor
         '''
-        assert_type(vector, Matrix, "argument vector needs to be of type Matrix")
+        if vector is not None:
+            assert_type(vector, Matrix, "argument vector needs to be of type Matrix")
         self._vector = vector
-        super(SemanticNode, self).__init__(label)
+        super(SemanticNode, self).__init__(label, node_type)
         
     
     def add_child(self, child):

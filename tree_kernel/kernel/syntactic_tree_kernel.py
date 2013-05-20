@@ -28,6 +28,7 @@ class SyntacticTreeKernel(TreeKernel):
     
     def dot_product(self, tree1, tree2):
         assert_type(tree1, SyntacticTree)
+        assert_type(tree2, SyntacticTree)
         all_nodes1 = tree1.get_nodes()
         all_nodes1.reverse()
         all_nodes2 = tree2.get_nodes()
