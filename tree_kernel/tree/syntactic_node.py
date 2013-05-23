@@ -37,6 +37,9 @@ class SyntacticNode(Node):
             return self._children[i]
         else:
             raise IndexError("Invalid index")
+        
+    def get_child_number(self):
+        return len(self._children)
     
     def is_pre_terminal(self):
         return (self._type != SyntacticNode.TERMINAL and len(self._children) == 1
