@@ -13,7 +13,7 @@ import numpy as np
 
 class NaiveCompositionalSemanticTreeKernel(SyntacticTreeKernel):
     '''
-    classdocs
+    Mixed Salad Kernel 1
     '''
     
     NO_COMPATIBILITY = 0
