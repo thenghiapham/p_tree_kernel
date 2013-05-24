@@ -8,7 +8,7 @@ class Kernel(object):
     '''
     classdocs
     '''
-
+    kernel_name = "abstract_kernel"
 
     def __init__(self):
         '''

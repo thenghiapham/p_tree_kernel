@@ -9,7 +9,7 @@ class TreeKernel(Kernel):
     '''
     classdocs
     '''
-
+    kernel_name = "abstract_tree_kernel"
 
     def __init__(self):
         '''

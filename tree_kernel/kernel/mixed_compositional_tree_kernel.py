@@ -13,6 +13,8 @@ class MixedCompositionalTreeKernel(SyntacticTreeKernel):
     '''
     Mixed Salad Kernel 2 variation
     '''
+    
+    kernel_name = "mixed_salad_kernel22"
 
 
     def __init__(self, lambda_):

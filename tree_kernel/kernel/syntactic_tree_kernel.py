@@ -15,7 +15,7 @@ class SyntacticTreeKernel(TreeKernel):
     '''
     classdocs
     '''
-
+    kernel_name = "syntactic_kernel"
 
     def __init__(self, lambda_):
         '''

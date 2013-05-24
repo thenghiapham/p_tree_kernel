@@ -13,7 +13,7 @@ class CollapsedCompositionalTreeKernel(SyntacticTreeKernel):
     '''
     Mixed Salad Kernel 2
     '''
-
+    kernel_name = "mixed_salad_kernel2"
 
     def __init__(self, lambda_):
         '''

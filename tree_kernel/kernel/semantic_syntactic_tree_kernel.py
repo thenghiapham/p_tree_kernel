@@ -15,7 +15,7 @@ class SemanticSyntacticTreeKernel(SyntacticTreeKernel):
     '''
     classdocs
     '''
-
+    kernel_name = "semantic_kernel"
 
     def __init__(self, lambda_, lexical_space):
         '''
