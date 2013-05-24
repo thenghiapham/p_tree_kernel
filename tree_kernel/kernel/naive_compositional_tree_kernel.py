@@ -8,8 +8,6 @@ from kernel_utils.type_utils import assert_type
 from tree.semantic_tree import SemanticTree
 from composes.similarity.cos import CosSimilarity
 from tree.syntactic_node import SyntacticNode
-from kernel_utils.data_structure_utils import list2dict
-import numpy as np
 
 class NaiveCompositionalSemanticTreeKernel(SyntacticTreeKernel):
     '''
