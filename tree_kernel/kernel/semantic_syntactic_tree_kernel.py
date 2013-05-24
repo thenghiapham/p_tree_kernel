@@ -5,7 +5,7 @@ Created on Apr 26, 2013
 '''
 from syntactic_tree_kernel import SyntacticTreeKernel
 from tree.syntactic_tree import SyntacticTree
-from utils.type_utils import assert_type
+from kernel_utils.type_utils import assert_type
 
 from composes.semantic_space.space import Space
 from composes.utils import io_utils

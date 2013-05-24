@@ -4,7 +4,7 @@ Created on Apr 16, 2013
 @author: thenghiapham
 '''
 
-from utils import type_utils
+from kernel_utils import type_utils
 
 class Node(object):
     '''

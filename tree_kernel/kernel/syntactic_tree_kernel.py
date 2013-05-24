@@ -5,9 +5,9 @@ Created on Apr 26, 2013
 '''
 import numpy as np
 from tree_kernel import TreeKernel
-from utils.type_utils import assert_type, is_numeric
+from kernel_utils.type_utils import assert_type, is_numeric
 from tree.syntactic_tree import SyntacticTree
-from utils.data_structure_utils import list2dict
+from kernel_utils.data_structure_utils import list2dict
 from tree.syntactic_node import SyntacticNode
 
 

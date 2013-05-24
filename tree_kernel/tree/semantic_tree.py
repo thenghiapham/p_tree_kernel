@@ -5,7 +5,7 @@ Created on Apr 29, 2013
 '''
 from tree.syntactic_tree import SyntacticTree
 from tree.semantic_node import SemanticNode
-from utils import type_utils
+from kernel_utils import type_utils
 
 class SemanticTree(SyntacticTree):
     '''

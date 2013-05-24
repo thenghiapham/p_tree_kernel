@@ -4,11 +4,11 @@ Created on Apr 29, 2013
 @author: thenghiapham
 '''
 from syntactic_tree_kernel import SyntacticTreeKernel
-from utils.type_utils import assert_type
+from kernel_utils.type_utils import assert_type
 from tree.semantic_tree import SemanticTree
 from composes.similarity.cos import CosSimilarity
 from tree.syntactic_node import SyntacticNode
-from utils.data_structure_utils import list2dict
+from kernel_utils.data_structure_utils import list2dict
 import numpy as np
 
 class NaiveCompositionalSemanticTreeKernel(SyntacticTreeKernel):

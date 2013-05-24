@@ -5,7 +5,7 @@ Created on May 20, 2013
 '''
 from syntactic_tree_kernel import SyntacticTreeKernel
 from composes.similarity.cos import CosSimilarity
-from utils.type_utils import assert_type
+from kernel_utils.type_utils import assert_type
 from tree.semantic_tree import SemanticTree
 from tree.syntactic_node import SyntacticNode
 
