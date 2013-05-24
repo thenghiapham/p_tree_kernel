@@ -33,7 +33,7 @@ def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space, composition_mod
 def _syntactic_node_2_semantic_node(syntactic_node, vector_space, composition_model, normed=True):
     
     if syntactic_node._type == SyntacticNode.TERMINAL:
-        return SemanticNode(syntactic_node._label, None, SyntacticNode.TERMINAL)
+        return SemanticNode(syntactic_node._label.lower(), None, SyntacticNode.TERMINAL)
     else:
         new_node = SemanticNode(syntactic_node._label, None)
         for child in syntactic_node._children:
