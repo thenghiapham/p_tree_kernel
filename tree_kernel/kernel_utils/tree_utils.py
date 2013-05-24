@@ -24,7 +24,7 @@ def penn_pos_2_simple_pos(penn_pos):
     simple_pos = penn_pos[0].lower()
     if not simple_pos in "abcdefghijklmnopqrstuvwxyz":
         simple_pos = "x"
-    return simple_pos 
+    return simple_pos
 
 def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space, composition_model, normed=True):
     assert_type(syntactic_tree, SyntacticTree)
@@ -61,14 +61,19 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space, composition_mo
                 new_node._vector = new_vector
         return new_node
 
-def lemma_tree_2_lemmapos_tree(syntactic_tree):
+def lemma_tree_2_lemmapos_tree(syntactic_tree, excluded_poss = {}):
     assert_type(syntactic_tree, SyntacticTree)
     return SyntacticTree(_lemma_tree_2_lemmapos_tree(syntactic_tree._root, None))
 
-def _lemma_tree_2_lemmapos_tree(syntactic_node, parent_node):
+def _lemma_tree_2_lemmapos_tree(syntactic_node, parent_node, excluded_poss):
     if syntactic_node._type == SyntacticNode.TERMINAL:
-        return SyntacticNode(syntactic_node._label.lower() + "-" + penn_pos_2_simple_pos(parent_node._label),
+        simple_pos = penn_pos_2_simple_pos(parent_node._label)
+        if simple_pos in excluded_poss:
+            return SyntacticNode(syntactic_node._label.lower(),
                              SyntacticNode.TERMINAL)
+        else:
+            return SyntacticNode(syntactic_node._label.lower() + "-" + simple_pos,
+                                 SyntacticNode.TERMINAL)
     else:
         new_node = SyntacticNode(syntactic_node._label, syntactic_node._type)
         for child in syntactic_node._children:
