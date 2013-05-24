@@ -18,7 +18,7 @@ class NaiveCompositionalSemanticTreeKernel(SyntacticTreeKernel):
     NO_COMPATIBILITY = 0
     LABEL_COMPATIBILITY = 1
 
-    def __init__(self, lambda_, compatibility_level = NaiveCompositionalSemanticTreeKernel.LABEL_COMPATIBILITY):
+    def __init__(self, lambda_, compatibility_level = LABEL_COMPATIBILITY):
         '''
         Constructor
         '''
