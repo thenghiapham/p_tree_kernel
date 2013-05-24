@@ -67,7 +67,7 @@ def lemma_tree_2_lemmapos_tree(syntactic_tree):
 
 def _lemma_tree_2_lemmapos_tree(syntactic_node, parent_node):
     if syntactic_node._type == SyntacticNode.TERMINAL:
-        return SyntacticNode(syntactic_node._label + "-" + penn_pos_2_simple_pos(parent_node._label),
+        return SyntacticNode(syntactic_node._label.lower() + "-" + penn_pos_2_simple_pos(parent_node._label),
                              SyntacticNode.TERMINAL)
     else:
         new_node = SyntacticNode(syntactic_node._label, syntactic_node._type)
