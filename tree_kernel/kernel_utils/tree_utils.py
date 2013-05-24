@@ -77,7 +77,7 @@ def _lemma_tree_2_lemmapos_tree(syntactic_node, parent_node, excluded_poss):
     else:
         new_node = SyntacticNode(syntactic_node._label, syntactic_node._type)
         for child in syntactic_node._children:
-            new_child = _lemma_tree_2_lemmapos_tree(child, syntactic_node)
+            new_child = _lemma_tree_2_lemmapos_tree(child, syntactic_node, excluded_poss)
             new_node.add_child(new_child)
             
         return new_node
