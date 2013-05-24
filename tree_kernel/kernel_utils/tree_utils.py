@@ -63,7 +63,7 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space, composition_mo
 
 def lemma_tree_2_lemmapos_tree(syntactic_tree, excluded_poss = {}):
     assert_type(syntactic_tree, SyntacticTree)
-    return SyntacticTree(_lemma_tree_2_lemmapos_tree(syntactic_tree._root, None))
+    return SyntacticTree(_lemma_tree_2_lemmapos_tree(syntactic_tree._root, None, excluded_poss))
 
 def _lemma_tree_2_lemmapos_tree(syntactic_node, parent_node, excluded_poss):
     if syntactic_node._type == SyntacticNode.TERMINAL:
