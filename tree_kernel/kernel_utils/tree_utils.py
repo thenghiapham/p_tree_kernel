@@ -8,7 +8,7 @@ from tree.semantic_tree import SemanticTree
 from tree.semantic_node import SemanticNode
 from tree.syntactic_tree import SyntacticTree
 from tree.syntactic_node import SyntacticNode
-from utils.type_utils import assert_type
+from kernel_utils.type_utils import assert_type
 from composes.transformation.scaling.row_normalization import RowNormalization
 import numpy as np
 from composes.matrix.dense_matrix import DenseMatrix
