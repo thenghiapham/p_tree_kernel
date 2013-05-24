@@ -5,7 +5,7 @@ Created on Apr 29, 2013
 '''
 from tree.syntactic_node import SyntacticNode
 from composes.matrix.matrix import Matrix
-from utils.type_utils import assert_type
+from kernel_utils.type_utils import assert_type
 
 class SemanticNode(SyntacticNode):
     '''
