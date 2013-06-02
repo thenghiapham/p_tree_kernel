@@ -25,7 +25,7 @@ class CollapsedCompositionalTreeKernel(SyntacticTreeKernel):
     # default one
     def dot_product(self, tree1, tree2):
         assert_type(tree1, SemanticTree)
-        assert_type(tree1, SemanticTree)
+        assert_type(tree2, SemanticTree)
         return super(CollapsedCompositionalTreeKernel, self).dot_product(tree1, tree2)
     
     # new delta
