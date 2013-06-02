@@ -12,7 +12,7 @@ class SentenceVectorKernel(Kernel):
     '''
     classdocs
     '''
-
+    kernel_name = "sentence_vector_kernel"
 
     def __init__(self, similarity=CosSimilarity()):
         '''
