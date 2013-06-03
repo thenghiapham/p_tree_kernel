@@ -49,7 +49,7 @@ class NaiveCompositionalSemanticTreeKernel(SyntacticTreeKernel):
     # default one
     def dot_product(self, tree1, tree2):
         assert_type(tree1, SemanticTree)
-        assert_type(tree1, SemanticTree)
+        assert_type(tree2, SemanticTree)
         return super(NaiveCompositionalSemanticTreeKernel, self).dot_product(tree1, tree2)
     
     def _delta(self, node1, node2, node2id1, node2id2, delta_matrix):
