@@ -31,5 +31,5 @@ class SentenceVectorKernel(Kernel):
         if sentence_vector1.norm() == 0.0 or sentence_vector2.norm() == 0.0:
             return 0.0
         else:
-            return self._similarity(sentence_vector1, sentence_vector2)
+            return self._similarity.get_sim(sentence_vector1, sentence_vector2)
     
