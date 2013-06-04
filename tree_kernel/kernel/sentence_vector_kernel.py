@@ -14,11 +14,14 @@ class SentenceVectorKernel(Kernel):
     '''
     kernel_name = "sentence_vector_kernel"
 
-    def __init__(self, similarity=CosSimilarity()):
+    def __init__(self, similarity=None):
         '''
         Constructor
         '''
-        self._similarity = similarity
+        if similarity is None:
+            self._similarity = CosSimilarity()
+        else:
+            self._similarity = similarity
     
     def dot_product(self, tree1, tree2):
         assert_type(tree1, SemanticTree)
@@ -28,5 +31,5 @@ class SentenceVectorKernel(Kernel):
         if sentence_vector1.norm() == 0.0 or sentence_vector2.norm() == 0.0:
             return 0.0
         else:
-            return self._similarity(sentence_vector1, sentence_vector2)
+            return self._similarity.get_sim(sentence_vector1, sentence_vector2)
     
