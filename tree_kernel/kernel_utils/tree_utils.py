@@ -14,13 +14,6 @@ import numpy as np
 from composes.matrix.dense_matrix import DenseMatrix
 
 def penn_pos_2_simple_pos(penn_pos):
-    """
-    try:
-        simple_pos = pos_map[penn_pos]
-        
-    except KeyError:
-        simple_pos = "?"
-    """
     simple_pos = penn_pos[0].lower()
     if not simple_pos in "abcdefghijklmnopqrstuvwxyz":
         simple_pos = "x"
@@ -30,6 +23,7 @@ def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space, composition_mod
     assert_type(syntactic_tree, SyntacticTree)
     return SemanticTree(_syntactic_node_2_semantic_node(syntactic_tree._root,
                                                          vector_space, composition_model))
+    
 def _syntactic_node_2_semantic_node(syntactic_node, vector_space, composition_model, normed=True):
     
     if syntactic_node._type == SyntacticNode.TERMINAL:
@@ -55,10 +49,14 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space, composition_mo
             # print new_node
             for i in range(1,len(new_node._children)):
                 new_vector = composition_model._compose(new_vector,new_node.get_child(i)._vector)
+            '''
+            # do not norm here
             if normed:
                 new_node._vector = RowNormalization().apply(new_vector)
             else:
-                new_node._vector = new_vector
+            '''
+            new_node._vector = new_vector
+                
         return new_node
 
 def lemma_tree_2_lemmapos_tree(syntactic_tree, excluded_poss = {}):

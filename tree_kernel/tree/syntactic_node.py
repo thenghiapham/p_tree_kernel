@@ -9,26 +9,26 @@ from kernel_utils import type_utils
 
 class SyntacticNode(Node):
     '''
-    classdocs
+    An instance of class represents a node in a syntactic tree (CCG or PSG tree)
     '''
+    
+    # constants to indicate the type of a node
     TERMINAL = 0
     NON_TERMINAL = 1
-    #PRE_TERMINAL = 2
 
-    def __init__(self, label, node_type=NON_TERMINAL):
+    def __init__(self, label, *args, **kwargs):
         '''
         Constructor
         '''
         self._label = label
         self._children = []
+        # TODO: fix here today
         self._type = node_type
+        self._lemma
     
     def add_child(self, child):
         if self._type == SyntacticNode.TERMINAL:
             raise ValueError("Terminal node cannot have child node")
-        #elif self._type == SyntacticNode.PRE_TERMINAL:
-        #    if len(self._children) >= 1:
-        #        raise ValueError("Pre_terminal node cannot have more than one child node")
         type_utils.assert_type(child, SyntacticNode)
         Node.add_child(self, child)
         
