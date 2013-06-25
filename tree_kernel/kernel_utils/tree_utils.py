@@ -19,24 +19,30 @@ def penn_pos_2_simple_pos(penn_pos):
         simple_pos = "x"
     return simple_pos
 
-def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space, composition_model, normed=True):
+def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space, 
+                                   composition_model, normed=True):
+    
     assert_type(syntactic_tree, SyntacticTree)
     return SemanticTree(_syntactic_node_2_semantic_node(syntactic_tree._root,
-                                                         vector_space, composition_model))
+                                                         vector_space,
+                                                         composition_model))
     
-def _syntactic_node_2_semantic_node(syntactic_node, vector_space, composition_model, normed=True):
+def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
+                                    composition_model, normed=True):
     
     if syntactic_node._type == SyntacticNode.TERMINAL:
-        return SemanticNode(syntactic_node._label.lower(), None, SyntacticNode.TERMINAL)
+        return SemanticNode(syntactic_node._label.lower(), None,
+                            SyntacticNode.TERMINAL)
     else:
         new_node = SemanticNode(syntactic_node._label, None)
         for child in syntactic_node._children:
-            new_child = _syntactic_node_2_semantic_node(child, vector_space, composition_model)
+            new_child = _syntactic_node_2_semantic_node(child, vector_space,
+                                                        composition_model)
             new_node.add_child(new_child)
             
-        if syntactic_node.is_pre_terminal():
+        if syntactic_node.is_terminal():
             try:
-                row_vector = vector_space.get_row(syntactic_node._children[0]._label)
+                row_vector = vector_space.get_row(syntactic_node._word)
                 if normed:
                     new_node._vector = RowNormalization().apply(row_vector)
                 else:
@@ -48,20 +54,17 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space, composition_mo
             new_vector = new_node.get_child(0)._vector
             # print new_node
             for i in range(1,len(new_node._children)):
-                new_vector = composition_model._compose(new_vector,new_node.get_child(i)._vector)
-            '''
-            # do not norm here
-            if normed:
-                new_node._vector = RowNormalization().apply(new_vector)
-            else:
-            '''
+                new_vector = composition_model._compose(new_vector,
+                                                        new_node.get_child(i)._vector)
+            
             new_node._vector = new_vector
                 
         return new_node
 
 def lemma_tree_2_lemmapos_tree(syntactic_tree, excluded_poss = {}):
     assert_type(syntactic_tree, SyntacticTree)
-    return SyntacticTree(_lemma_tree_2_lemmapos_tree(syntactic_tree._root, None, excluded_poss))
+    return SyntacticTree(_lemma_tree_2_lemmapos_tree(syntactic_tree._root, None,
+                                                     excluded_poss))
 
 def _lemma_tree_2_lemmapos_tree(syntactic_node, parent_node, excluded_poss):
     if syntactic_node._type == SyntacticNode.TERMINAL:
@@ -70,12 +73,14 @@ def _lemma_tree_2_lemmapos_tree(syntactic_node, parent_node, excluded_poss):
             return SyntacticNode(syntactic_node._label.lower(),
                              SyntacticNode.TERMINAL)
         else:
-            return SyntacticNode(syntactic_node._label.lower() + "-" + simple_pos,
+            return SyntacticNode(syntactic_node._label.lower() + "-" 
+                                 + simple_pos,
                                  SyntacticNode.TERMINAL)
     else:
         new_node = SyntacticNode(syntactic_node._label, syntactic_node._type)
         for child in syntactic_node._children:
-            new_child = _lemma_tree_2_lemmapos_tree(child, syntactic_node, excluded_poss)
+            new_child = _lemma_tree_2_lemmapos_tree(child, syntactic_node,
+                                                    excluded_poss)
             new_node.add_child(new_child)
             
         return new_node

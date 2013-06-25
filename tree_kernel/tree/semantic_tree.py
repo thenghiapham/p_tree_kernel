@@ -24,6 +24,9 @@ class SemanticTree(SyntacticTree):
     def read_tree(cls, string, tree_format=0):
         raise NotImplementedError()
     
+    
+    '''
     @classmethod
     def _read_branches(cls, string, tree_format=0):
         raise NotImplementedError()
+    '''

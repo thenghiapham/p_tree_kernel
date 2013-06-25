@@ -14,7 +14,7 @@ class Kernel(object):
         '''
         Constructor
         '''
-        pass
+        raise NotImplementedError()
     
     def dot_product(self, s1, s2):
-        return 0.0
+        raise NotImplementedError()

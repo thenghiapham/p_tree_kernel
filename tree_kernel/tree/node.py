@@ -22,8 +22,8 @@ class Node(object):
     def add_child(self,child):
         """Add a child Node to a Node.
 
-        Keyword arguments:
-        child -- the child Node
+        Args:
+        child: the child Node
         """
         # check whether the child belong to the class Node
         type_utils.assert_type(child, Node)
