@@ -6,6 +6,7 @@ Created on Apr 16, 2013
 
 from syntactic_node import SyntacticNode
 from kernel_utils import type_utils
+from xml.etree import ElementTree
 
 class SyntacticTree(object):
     '''
@@ -18,9 +19,45 @@ class SyntacticTree(object):
         '''
         type_utils.assert_type(root, SyntacticNode)
         self._root = root
+    
         
+    
+    
     @classmethod
-    def parse_tree(cls, xml_string):
+    def parse_tree_from_element(cls, element):
+        """Read a SyntacticTree from an ElementTree
+        
+        Args:
+        element: the ElementTree of the xml output from a CCG parser
+            
+        Returns:
+        the SyntacticTree represented by the element
+        """
+        if element.tag == "ccg":
+            return SyntacticTree(cls._element_2_syntactic_node(element[0]))
+        else:
+            raise ValueError("element must be a <ccg> element")
+    
+    @classmethod
+    def _element_2_syntactic_node(cls, element):
+        cat = element.attrib["cat"]
+        
+        if element.tag == "lf":
+            
+            terminal_node = SyntacticNode(cat, 
+                                          pos=element.attrib["pos"],
+                                          lemma=element.attrib["lemma"],
+                                          word=element.attrib["word"])
+            return terminal_node
+        else:
+            node = SyntacticNode(cat)
+            for child_element in element:
+                child_node = cls._element_2_syntactic_node(child_element)
+                node.add_child(child_node)
+            return node
+    
+    @classmethod
+    def parse_tree_from_xml_string(cls, xml_string):
         """Read a SyntacticTree from an xml string
         
         Args:
@@ -29,7 +66,8 @@ class SyntacticTree(object):
         Returns:
         the SyntacticTree represented by the input xml string
         """
-        pass
+        element = ElementTree.fromstring(xml_string)
+        return cls.parse_tree_from_element(element)
     
     @classmethod
     def read_tree(cls, string):

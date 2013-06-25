@@ -125,16 +125,19 @@ class SyntacticNode(Node):
         return self._type == SyntacticNode.TERMINAL
     
     def __str__(self):
+        label = self._label
+        label = label.replace("(","<")
+        label = label.replace(")",">")
         if self._type == SyntacticNode.TERMINAL:
-            return "(%s %s)" %(self._label, self._word)
+            return "(%s %s)" %(label, self._word)
         else:
             if not self._children:
-                return self._label
+                return label
             else:
                 child_string = ""
                 for child in self._children:
                     child_string = child_string + " " + str(child)
-                return "(%s%s)" %(self._label, child_string)
+                return "(%s%s)" %(label, child_string)
     
     
     # define all attributes    

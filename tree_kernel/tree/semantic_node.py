@@ -18,7 +18,7 @@ class SemanticNode(SyntacticNode):
         Constructor
         '''
         
-        super(SemanticNode, self).__init__(label, args, kwargs)
+        super(SemanticNode, self).__init__(label, *args, **kwargs)
         
         if vector is not None:
             assert_type(vector, Matrix, "argument vector needs to be of type Matrix")
@@ -27,18 +27,20 @@ class SemanticNode(SyntacticNode):
     @classmethod
     def create_semantic_node(cls, syntactic_node, vector):
         label = syntactic_node.label
+        semantic_node = None
         if syntactic_node.is_terminal():
             word = syntactic_node.word
             pos = syntactic_node.pos
             # TODO: does this work with "lemma"?
             if hasattr(syntactic_node, "lemma"):
                 lemma = syntactic_node.lemma
-                return SemanticNode(label,vector, word=word, pos=pos, lemma=lemma)
+                semantic_node = SemanticNode(label,vector, word=word, pos=pos, lemma=lemma)
             else:
-                return SemanticNode(label,vector, word=word, pos=pos)
+                semantic_node = SemanticNode(label,vector, word=word, pos=pos)
                 
         else:
-            return SemanticNode(label,vector)
+            semantic_node = SemanticNode(label,vector)
+        return semantic_node
         
     
     def add_child(self, child):

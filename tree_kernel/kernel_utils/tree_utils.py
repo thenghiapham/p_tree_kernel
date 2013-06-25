@@ -29,8 +29,6 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
                                     composition_model, normed=True):
     
     new_node = SemanticNode.create_semantic_node(syntactic_node, None)
-    
-        
     if syntactic_node.is_terminal():
         try:
             row_vector = vector_space.get_row(syntactic_node._word)
@@ -55,7 +53,6 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
                                                     new_node.get_child(i).vector)
         
         new_node.vector = new_vector
-            
     return new_node
 
 def lemma_tree_2_lemmapos_tree(syntactic_tree, excluded_poss = {}):
