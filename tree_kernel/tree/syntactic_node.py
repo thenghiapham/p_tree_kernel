@@ -47,6 +47,17 @@ class SyntacticNode(Node):
         type_utils.assert_type(child, SyntacticNode)
         Node.add_child(self, child)
         
+    def copy(self, recursive = False):
+        if self._is_terminal():
+            new_node = SyntacticNode(self._label, pos=self._pos, word=self._word)
+            if self._lemma is not None:
+                new_node._lemma = self._lemma
+        else:
+            new_node = SyntacticNode(self._label)
+        
+        # TODO: copy recursively?
+        return new_node
+        
     def get_child(self, i):
         """Get the i-th child from a SyntacticNode.
 
@@ -152,7 +163,9 @@ class SyntacticNode(Node):
             return self._word
         else:
             raise AttributeError("Node does not have word form attribute")
-    word = property(get_word)
+    def set_word(self, word):
+        self._word = word
+    word = property(get_word, set_word)
         
     def get_pos(self):
         if self._pos is not None:

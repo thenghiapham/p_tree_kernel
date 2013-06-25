@@ -8,7 +8,6 @@ from tree_kernel import TreeKernel
 from kernel_utils.type_utils import assert_type, is_numeric
 from tree.syntactic_tree import SyntacticTree
 from kernel_utils.data_structure_utils import list2dict
-from tree.syntactic_node import SyntacticNode
 
 
 class SyntacticTreeKernel(TreeKernel):
