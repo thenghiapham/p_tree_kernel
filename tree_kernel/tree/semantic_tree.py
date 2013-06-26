@@ -9,7 +9,7 @@ from kernel_utils import type_utils
 
 class SemanticTree(SyntacticTree):
     '''
-    classdocs
+    An instance of this class represents a semantic tree (CCG or PSG tree)
     '''
 
 
@@ -25,8 +25,3 @@ class SemanticTree(SyntacticTree):
         raise NotImplementedError()
     
     
-    '''
-    @classmethod
-    def _read_branches(cls, string, tree_format=0):
-        raise NotImplementedError()
-    '''

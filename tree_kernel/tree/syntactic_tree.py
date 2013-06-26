@@ -14,13 +14,27 @@ class SyntacticTree(object):
     '''
 
     def __init__(self,root):
-        '''
-        Constructor
+        '''Constructor
+        
+        Args:
+        root<SyntacticNode>: the root node of the tree
         '''
         type_utils.assert_type(root, SyntacticNode)
         self._root = root
     
+    
+    @classmethod
+    def parse_tree_from_xml_string(cls, xml_string):
+        """Read a SyntacticTree from an xml string
         
+        Args:
+        string: the xml input string from a CCG parser
+            
+        Returns:
+        the SyntacticTree represented by the input xml string
+        """
+        element = ElementTree.fromstring(xml_string)
+        return cls.parse_tree_from_element(element)    
     
     
     @classmethod
@@ -36,7 +50,7 @@ class SyntacticTree(object):
         if element.tag == "ccg":
             return SyntacticTree(cls._element_2_syntactic_node(element[0]))
         else:
-            raise ValueError("element must be a <ccg> element")
+            raise ValueError("element parameter must be a <ccg> element")
     
     @classmethod
     def _element_2_syntactic_node(cls, element):
@@ -56,18 +70,6 @@ class SyntacticTree(object):
                 node.add_child(child_node)
             return node
     
-    @classmethod
-    def parse_tree_from_xml_string(cls, xml_string):
-        """Read a SyntacticTree from an xml string
-        
-        Args:
-        string: the xml input string from a CCG parser
-            
-        Returns:
-        the SyntacticTree represented by the input xml string
-        """
-        element = ElementTree.fromstring(xml_string)
-        return cls.parse_tree_from_element(element)
     
     @classmethod
     def read_tree(cls, string):
@@ -110,14 +112,7 @@ class SyntacticTree(object):
                     root.add_child(branch._root)
             
             return SyntacticTree(root)
-    
-    # TODO: move this method to SyntacticNode?
-    @classmethod
-    def _read_terminal_node(cls, elements):
-        # TODO: add option to read lemma, pos if the input come from ccg
-        label = elements[0]
-        word = elements[1]
-        return SyntacticNode(label, word=word, pos=label)
+        
     
     @classmethod
     def _read_branches(cls, string):
@@ -159,11 +154,41 @@ class SyntacticTree(object):
         if left_bracket_minus_right_bracket > 0:
             raise ValueError("%s cannot be a forest" %string)
         
-                 
+    
+    # TODO: move this method to SyntacticNode?
+    @classmethod
+    def _read_terminal_node(cls, elements):
+        """Read a terminal SyntacticNode from a string
+        
+        Args:
+        string: the input string
+            e.g. NNP Mary
+        
+        Returns:
+        the SyntacticNode
+            e.g. (label = NNP, word = Mary, pos = NNP)
+        """
+        
+        # TODO: add option to read lemma, pos if the input come from ccg
+        label = elements[0]
+        word = elements[1]
+        return SyntacticNode(label, word=word, pos=label)
+
+    
     def __str__(self):
+        """Get the string representation of a tree
+        
+        Returns:
+        a string
+        """
         return str(self._root)
     
     def get_nodes(self):
+        """Get the list every node in a tree in breath-first order
+        
+        Returns:
+        the list of every node
+        """
         all_nodes = [] 
         if not self._root is None:
             all_nodes.append(self._root)
@@ -174,8 +199,11 @@ class SyntacticTree(object):
                 i += 1 
         return all_nodes
     
-    # TODO: implement get_all_subtrees ?
-
-
     
-        
+    # define properties
+    def get_root(self):
+        return self._root
+    root = property(get_root)
+    
+    
+    # TODO: implement get_all_subtrees ?
