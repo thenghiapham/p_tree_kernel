@@ -20,7 +20,8 @@ def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space,
         syntactic_tree: the input syntatic_tree
         vector_space: a vector space where the lexical vectors can be retrieved
         composition_model: the compositional model, with which the vector
-            representations of phrases are computed (
+            representations of phrases are computed (the compositional model
+            should be either WeightedAdditive, Multiplicative or FullAdditive)
         normed: a boolean value indicating whether the lexical vectors should be
             normalized or not
         
@@ -41,7 +42,8 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
         syntactic_node: the input syntatic_node
         vector_space: a vector space where the lexical vectors can be retrieved
         composition_model: the compositional model, with which the vector
-            representations of phrases are computed
+            representations of phrases are computed (the compositional model
+            should be either WeightedAdditive, Multiplicative or FullAdditive)
         normed: a boolean value indicating whether the lexical vectors should be
             normalized or not
         
@@ -68,7 +70,8 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
                 new_node._vector = row_vector
         except KeyError:
             matrix_type = type(vector_space.cooccurrence_matrix)
-            new_node._vector =  matrix_type(np.zeros((1,vector_space.cooccurrence_matrix.shape[1]),
+            vector_shape = (1,vector_space.cooccurrence_matrix.shape[1])
+            new_node._vector =  matrix_type(np.zeros(vector_shape,
                                                      dtype=np.float))
     else:
         for child in syntactic_node._children:
