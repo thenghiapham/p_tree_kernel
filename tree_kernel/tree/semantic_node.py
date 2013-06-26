@@ -41,12 +41,12 @@ class SemanticNode(SyntacticNode):
         representation
 
         Args:
-        syntactic_node: a syntatic_node
-        vector: a vector representation for the node/phrase
+            syntactic_node: a syntatic_node
+            vector: a vector representation for the node/phrase
         
         Returns:
-        the semantic node, this node has all the information of the syntactic 
-        node, except for the child nodes
+            the semantic node, this node has all the information of the syntactic 
+            node, except for the child nodes
         """
         
         label = syntactic_node.label

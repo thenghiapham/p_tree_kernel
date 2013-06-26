@@ -3,22 +3,30 @@ Created on Apr 29, 2013
 
 @author: nghia
 '''
-
+import numpy as np
 from tree.semantic_tree import SemanticTree
 from tree.semantic_node import SemanticNode
 from tree.syntactic_tree import SyntacticTree
 from kernel_utils.type_utils import assert_type
-from composes.transformation.scaling.row_normalization import RowNormalization
-import numpy as np
 
-def penn_pos_2_simple_pos(penn_pos):
-    simple_pos = penn_pos[0].lower()
-    if not simple_pos in "abcdefghijklmnopqrstuvwxyz":
-        simple_pos = "x"
-    return simple_pos
+from composes.transformation.scaling.row_normalization import RowNormalization
+
 
 def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space, 
                                    composition_model, normed=True):
+    """Create a SemanticTree from a SyntacticTree
+    
+    Args:
+        syntactic_tree: the input syntatic_tree
+        vector_space: a vector space where the lexical vectors can be retrieved
+        composition_model: the compositional model, with which the vector
+            representations of phrases are computed (
+        normed: a boolean value indicating whether the lexical vectors should be
+            normalized or not
+        
+    Returns:
+        the semantic tree
+    """
     
     assert_type(syntactic_tree, SyntacticTree)
     return SemanticTree(_syntactic_node_2_semantic_node(syntactic_tree._root,
@@ -27,8 +35,30 @@ def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space,
     
 def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
                                     composition_model, normed=True):
+    """Create a SemanticNode from a SyntacticNode recursively
+    
+    Args:
+        syntactic_node: the input syntatic_node
+        vector_space: a vector space where the lexical vectors can be retrieved
+        composition_model: the compositional model, with which the vector
+            representations of phrases are computed
+        normed: a boolean value indicating whether the lexical vectors should be
+            normalized or not
+        
+    Returns:
+        the semantic node
+    """
     
     new_node = SemanticNode.create_semantic_node(syntactic_node, None)
+    
+    # if the node is a terminal node:
+    #   - retrieve the lexical vector
+    # if the node is non-terminal
+    #   - recursively apply this function to the child nodes to get the vector
+    #     representations of the child nodes
+    #   - use the composition model, and the vectors of the children to compute
+    #     the vector of the current node
+    # 
     if syntactic_node.is_terminal():
         try:
             row_vector = vector_space.get_row(syntactic_node._word)
@@ -54,6 +84,13 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
         
         new_node.vector = new_vector
     return new_node
+
+def penn_pos_2_simple_pos(penn_pos):
+    simple_pos = penn_pos[0].lower()
+    if not simple_pos in "abcdefghijklmnopqrstuvwxyz":
+        simple_pos = "x"
+    return simple_pos
+
 
 def lemma_tree_2_lemmapos_tree(syntactic_tree, excluded_poss = {}):
     assert_type(syntactic_tree, SyntacticTree)

@@ -9,7 +9,8 @@ from kernel_utils import type_utils
 
 class SemanticTree(SyntacticTree):
     '''
-    An instance of this class represents a semantic tree (CCG or PSG tree)
+    An instance of this class represents a semantic tree (CCG or PSG tree),
+    in which every node in the tree has a vector representation
     '''
 
 
