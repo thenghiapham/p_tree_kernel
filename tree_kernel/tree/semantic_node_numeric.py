@@ -118,7 +118,7 @@ class SemanticNode(SyntacticNode):
 
     def get_matrep(self):
         if len(self._children) == 1:
-                        self._matrep = self.get_child(0).get_matrep()
+            self._matrep = self.get_child(0).get_matrep()
         if len(self._children) == 2 and self._matrep == []:
             matrep1=self.get_child(0).get_matrep()
             matrep2=self.get_child(1).get_matrep()
@@ -153,15 +153,15 @@ class SemanticNode(SyntacticNode):
 
     def get_numrep(self,multiply_matrices=False):
         if len(self._children) == 1:
-                        self._numrep = self.get_child(0).get_numrep()
+            self._numrep = self.get_child(0).get_numrep()
         if len(self._children) == 2 and self._numrep == []:
             matrep1=self.get_child(0).get_numrep()
             matrep2=self.get_child(1).get_numrep()
             arity1=len(matrep1)-1
             arity2=len(matrep2)-1
             if arity1-arity2 == 0:
-                    for x in range(0, arity1 +1):
-                            self._numrep.append(matrep1[x].__add__(matrep2[x]))
+                for x in range(0, arity1 +1):
+                    self._numrep.append(matrep1[x].__add__(matrep2[x]))
             if arity1 < arity2 and not matrep1==[]:
                 for x in range(0, arity2):
                     if x == 0:
