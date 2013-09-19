@@ -11,7 +11,7 @@ from composes.utils import io_utils
 # This temporary module contains a function to perform lexical
 # insertion, to be added as a constructor method to the SemanticNode
 # class, and a simple function to test lexical insertion.
-
+#
 # More details follow with the various functions.
 
 def adhoc_print_lexitems(infile,vecfilepref,matfilepref,outfilename=None):
