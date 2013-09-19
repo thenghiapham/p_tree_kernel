@@ -4,13 +4,13 @@ Created on Apr 29, 2013
 @author: nghia
 '''
 from tree.syntactic_node import SyntacticNode
-#import numpy as np
-from composes.matrix.matrix import Matrix
+import numpy as np
+#from composes.matrix.matrix import Matrix
 from composes.matrix.dense_matrix import DenseMatrix
-#from composes.matrix.linalg import Linalg
+from composes.matrix.linalg import Linalg
 from kernel_utils.type_utils import assert_type
 import re
-from tree.temp_marco import insert_terminal_node_representation
+from tree.temp_marco_numeric import insert_terminal_node_representation
 
 class SemanticNode(SyntacticNode):
     '''
@@ -28,7 +28,7 @@ class SemanticNode(SyntacticNode):
         Constructor
         
         Args:
-            label<string>: the label (cat in CCG tree) of the node        
+            label<string>: the label (cat in CCG tree) of the node	
             vector<composes.matrix.matrix.Matrix>: the vector represention of 
                 the node
             kwargs: see the constructor of a syntactic node
@@ -36,9 +36,9 @@ class SemanticNode(SyntacticNode):
         
         super(SemanticNode, self).__init__(label, *args, **kwargs)
         
-        
-        self._matrep = matrep
-        self._numrep = numrep
+	
+	self._matrep = matrep
+	self._numrep = numrep
         
     @classmethod
     def create_semantic_node(cls, syntactic_node, vecspace, matspace):
@@ -62,18 +62,18 @@ class SemanticNode(SyntacticNode):
             word = syntactic_node.word
             pos = syntactic_node.pos
             # TODO: does this work with "lemma"?
-            #Denis's addition
-            matrep,temp_numrep=insert_terminal_node_representation(syntactic_node,vecspace,matspace,use_wordform=0)
-            if temp_numrep[0] == "empty":
-                numrep = []
-            else:
-                numrep = [temp_numrep[0].transpose()]
-                dimensionality=(temp_numrep[0].shape[1])
-                if len(temp_numrep)>1:
-                    for x in range(1, (len(temp_numrep))):
-                        y = DenseMatrix(temp_numrep[x])
-                        y.reshape((dimensionality,(y.shape[1]/dimensionality)))
-                        numrep.append(y)
+	#Denis's addition
+	    matrep,temp_numrep=insert_terminal_node_representation(syntactic_node,vecspace,matspace,use_wordform=0)
+	    if temp_numrep[0] == "empty":
+	    	numrep = []
+	    else:
+		    numrep = [temp_numrep[0].transpose()]
+		    dimensionality=(temp_numrep[0].shape[1])
+		    if len(temp_numrep)>1:
+			    for x in range(1, (len(temp_numrep))):
+				y = DenseMatrix(temp_numrep[x])
+				y.reshape((3,3))
+				numrep.append(y)
             if hasattr(syntactic_node, "_lemma"):
                 lemma = syntactic_node.lemma
                 semantic_node = SemanticNode(label, matrep,numrep, word=word, pos=pos, lemma=lemma)
@@ -82,8 +82,8 @@ class SemanticNode(SyntacticNode):
                 
         else:
             semantic_node = SemanticNode(label,[], [])
-        for child in syntactic_node._children:
-                semantic_node.add_child(SemanticNode.create_semantic_node(child,vecspace,matspace))
+	for child in syntactic_node._children:
+		semantic_node.add_child(SemanticNode.create_semantic_node(child,vecspace,matspace))
         return semantic_node
         
     
@@ -101,9 +101,9 @@ class SemanticNode(SyntacticNode):
         
     # define properties    
     def get_vector(self):
-        numrep = self.get_numrep()
-        if numrep != []: vector = numrep[0].transpose()
-        else: vector = None
+	numrep = self.get_numrep()
+	if numrep != []: vector = numrep[0].transpose()
+	else: vector = None
         if vector is not None:
             assert_type(vector, Matrix, "argument vector needs to be of type Matrix")
         self._vector = vector
@@ -117,75 +117,74 @@ class SemanticNode(SyntacticNode):
     vector = property(get_vector, set_vector)
 
     def get_matrep(self):
-        if len(self._children) == 1:
-            self._matrep = self.get_child(0).get_matrep()
-        if len(self._children) == 2 and self._matrep == []:
-            matrep1=self.get_child(0).get_matrep()
-            matrep2=self.get_child(1).get_matrep()
-            arity1=len(matrep1)-1
-            arity2=len(matrep2)-1
-            if arity1-arity2 == 0:
-                for x in range(0, arity1 +1):
-                    self._matrep.append('(' + matrep1[x] + '+' + matrep2[x] + ')')
-            if arity1 < arity2 and not re.search('empty$',matrep2[0]):
-                for x in range(0, arity2):
-                    if x == 0:
-                        self._matrep.append('(' + matrep2[x] + '+' + matrep2[arity2] + '*' + matrep1[x] + ')')
-                    elif x < len(matrep1):
-                        self._matrep.append('(' + matrep2[x] + '*' + matrep1[x] + ')')
-                    else:
-                        self._matrep.append(matrep2[x])
-            if arity1 > arity2 and not re.search('empty$',matrep1[0]):
-                for x in range(0, arity1):
-                    if x == 0:
-                        self._matrep.append('(' + matrep1[x] + '+' + matrep1[arity1] + '*' + matrep2[x] + ')')
-                    elif x < len(matrep2):
-                        self._matrep.append('(' + matrep1[x] + '*' + matrep2[x] + ')')
-                    else:
-                        self._matrep.append(matrep1[x])
-            if re.search('empty$',matrep1[0]): self._matrep = matrep2
-            if re.search('empty$',matrep2[0]): self._matrep = matrep1
+	if len(self._children) == 1:
+			self._matrep = self.get_child(0).get_matrep()
+	if len(self._children) == 2 and self._matrep == []:
+		matrep1=self.get_child(0).get_matrep()
+		matrep2=self.get_child(1).get_matrep()
+		arity1=len(matrep1)-1
+		arity2=len(matrep2)-1
+		if arity1-arity2 == 0:
+			for x in range(0, arity1 +1):
+				self._matrep.append('(' + matrep1[x] + '+' + matrep2[x] + ')')
+		if arity1 < arity2 and not re.search('empty$',matrep2[0]):
+			for x in range(0, arity2):
+				if x == 0:
+					self._matrep.append('(' + matrep2[x] + '+' + matrep2[arity2] + '*' + matrep1[x] + ')')
+				elif x < len(matrep1):
+					self._matrep.append('(' + matrep2[x] + '*' + matrep1[x] + ')')
+				else:
+					self._matrep.append(matrep2[x])
+		if arity1 > arity2 and not re.search('empty$',matrep1[0]):
+			for x in range(0, arity1):
+				if x == 0:
+					self._matrep.append('(' + matrep1[x] + '+' + matrep1[arity1] + '*' + matrep2[x] + ')')
+				elif x < len(matrep2):
+					self._matrep.append('(' + matrep1[x] + '*' + matrep2[x] + ')')
+				else:
+					self._matrep.append(matrep1[x])
+		if re.search('empty$',matrep1[0]): self._matrep = matrep2
+		if re.search('empty$',matrep2[0]): self._matrep = matrep1
 
-        if len(self._children)>2:
-            raise ValueError("Matrix representations are not defined for trees with more than binary branching")
-        return self._matrep
+	if len(self._children)>2:
+		raise ValueError("Matrix representations are not defined for trees with more than binary branching")
+	return self._matrep
     matrep = property(get_matrep)
 
-    def get_numrep(self,multiply_matrices=False):
+    def get_numrep(self):
         if len(self._children) == 1:
-            self._numrep = self.get_child(0).get_numrep()
+                        self._numrep = self.get_child(0).get_numrep()
         if len(self._children) == 2 and self._numrep == []:
-            matrep1=self.get_child(0).get_numrep()
-            matrep2=self.get_child(1).get_numrep()
-            arity1=len(matrep1)-1
-            arity2=len(matrep2)-1
-            if arity1-arity2 == 0:
-                for x in range(0, arity1 +1):
-                    self._numrep.append(matrep1[x].__add__(matrep2[x]))
-            if arity1 < arity2 and not matrep1==[]:
-                for x in range(0, arity2):
-                    if x == 0:
-                        self._numrep.append(matrep2[x].__add__(matrep2[arity2] * matrep1[x]))
-                    elif x < len(matrep1):
-                        if multiply_matrices: self._numrep.append(matrep2[x] * matrep1[x])
-                        else: self._numrep.append(matrep1[x].__add__(matrep2[x]))
-                    else:
-                        self._numrep.append(matrep2[x])
-            if arity1 > arity2 and not matrep2==[]:
-                for x in range(0, arity1):
-                    if x == 0:
-                        self._numrep.append(matrep1[x].__add__(matrep1[arity1]*matrep2[x]))
-                    elif x < len(matrep2):
-                        if multiply_matrices: self._numrep.append(matrep2[x] * matrep1[x])
-                        else: self._numrep.append(matrep1[x].__add__(matrep2[x]))
-                    else:
-                        self._numrep.append(matrep1[x])
-            if (matrep1 == []): self._numrep = matrep2
-            if (matrep2 == []): self._numrep = matrep1
-        #if self._numrep != []:
-            #if re.search('empty$',self._numrep[0]): self._vector = None
-            #else: self._vector = self._numrep[0]
+                matrep1=self.get_child(0).get_numrep()
+                matrep2=self.get_child(1).get_numrep()
+                arity1=len(matrep1)-1
+                arity2=len(matrep2)-1
+                if arity1-arity2 == 0:
+                        for x in range(0, arity1 +1):
+                                self._numrep.append(matrep1[x].__add__(matrep2[x]))
+                if arity1 < arity2 and not matrep1==[]:
+                        for x in range(0, arity2):
+                                if x == 0:
+                                        self._numrep.append(matrep2[x].__add__(matrep2[arity2] * matrep1[x]))
+                                elif x < len(matrep1):
+                                        self._numrep.append(matrep2[x] * matrep1[x])
+                                else:
+                                        self._numrep.append(matrep2[x])
+		if arity1 > arity2 and not matrep2==[]:
+                        for x in range(0, arity1):
+                                if x == 0:
+                                        self._numrep.append(matrep1[x].__add__(matrep1[arity1]*matrep2[x]))
+                                elif x < len(matrep2):
+                                        self._numrep.append(matrep1[x] * matrep2[x])
+                                else:
+                                        self._numrep.append(matrep1[x])
+                if (matrep1 == []): self._numrep = matrep2
+                if (matrep2 == []): self._numrep = matrep1
+	#if self._numrep != []:
+                #if re.search('empty$',self._numrep[0]): self._vector = None
+		#else: self._vector = self._numrep[0]
         if len(self._children)>2:
-            raise ValueError("Matrix representations are not defined for trees with more than binary branching")
-        return self._numrep
+                raise ValueError("Matrix representations are not defined for trees with more than binary branching")
+	return self._numrep
     numrep = property(get_numrep)
+
