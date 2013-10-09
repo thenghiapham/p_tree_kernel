@@ -32,7 +32,7 @@ def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space,
     assert_type(syntactic_tree, SyntacticTree)
     return SemanticTree(_syntactic_node_2_semantic_node(syntactic_tree._root,
                                                          vector_space,
-                                                         composition_model))
+                                                         composition_model, normed))
     
 def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
                                     composition_model, normed=True):
