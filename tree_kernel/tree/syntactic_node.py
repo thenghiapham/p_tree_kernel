@@ -172,10 +172,19 @@ class SyntacticNode(Node):
         if a node is terminal, the label and the word is used
         """
         label = self._label
+        if label == "(":
+            label = "LRB"
+        elif label == ")":
+            label = "RRB"
         label = label.replace("(","<")
         label = label.replace(")",">")
         if self._type == SyntacticNode.TERMINAL:
-            return "(%s %s)" %(label, self._word)
+            word = self._word
+            if word == "(":
+                word = "LRB"
+            elif word == ")":
+                word = "RRB"
+            return "(%s (%s %s))" %(label, self._pos, word)
         else:
             if not self._children:
                 return label

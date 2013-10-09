@@ -34,8 +34,8 @@ class SyntacticTree(object):
         the SyntacticTree represented by the input xml string
         """
         element = ElementTree.fromstring(xml_string)
-        return cls.parse_tree_from_element(element)    
-    
+        return cls.parse_tree_from_element(element)
+
     
     @classmethod
     def parse_tree_from_element(cls, element):
@@ -48,6 +48,9 @@ class SyntacticTree(object):
         the SyntacticTree represented by the element
         """
         if element.tag == "ccg":
+            if len(element) == 0:
+                print "empty tree"
+                return SyntacticTree(SyntacticNode("S"))
             return SyntacticTree(cls._element_2_syntactic_node(element[0]))
         else:
             raise ValueError("element parameter must be a <ccg> element")
@@ -87,6 +90,8 @@ class SyntacticTree(object):
         
         # first, remove the brackets ()
         string = string.strip()
+        if len(string) == 0:
+            raise ValueError("empty string cannot be a Synstactic Tree")
         if string[0] == "(" and string[-1] == ")":
             string = string[1:-1]
         
