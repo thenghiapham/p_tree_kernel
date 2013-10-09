@@ -68,7 +68,7 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
                 new_node._vector = RowNormalization().apply(row_vector)
             else:
                 new_node._vector = row_vector
-            print new_node._vector
+            # print new_node._vector
         except KeyError:
             print "missing word:", syntactic_node._word
             matrix_type = type(vector_space.cooccurrence_matrix)
