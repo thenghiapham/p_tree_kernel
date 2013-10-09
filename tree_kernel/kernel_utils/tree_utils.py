@@ -68,7 +68,9 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
                 new_node._vector = RowNormalization().apply(row_vector)
             else:
                 new_node._vector = row_vector
+            print new_node._vector
         except KeyError:
+            print "missing word:", syntactic_node._word
             matrix_type = type(vector_space.cooccurrence_matrix)
             vector_shape = (1,vector_space.cooccurrence_matrix.shape[1])
             new_node._vector =  matrix_type(np.zeros(vector_shape,
@@ -76,7 +78,7 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
     else:
         for child in syntactic_node._children:
             new_child = _syntactic_node_2_semantic_node(child, vector_space,
-                                                        composition_model)
+                                                        composition_model, normed)
             new_node.add_child(new_child)
         
         new_vector = new_node.get_child(0).vector
