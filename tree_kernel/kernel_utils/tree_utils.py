@@ -66,6 +66,7 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
             row_vector = vector_space.get_row(syntactic_node._word)
             if normed:
                 new_node._vector = RowNormalization().apply(row_vector)
+                print "shouldn't be here"
             else:
                 new_node._vector = row_vector
             # print new_node._vector
