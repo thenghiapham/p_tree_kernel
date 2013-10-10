@@ -188,7 +188,7 @@ class SyntacticTree(object):
         else:
             result = self._get_surface_string(node.get_child(0))
             for i in range(1,node.get_child_number()):
-                result = result + " %s" %node.get_child(i).lemma
+                result = result + " %s" %self._get_surface_string(node.get_child(i))
             return result
     
     def __str__(self):
