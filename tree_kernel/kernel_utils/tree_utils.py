@@ -10,6 +10,8 @@ from tree.syntactic_tree import SyntacticTree
 from kernel_utils.type_utils import assert_type
 
 from composes.transformation.scaling.row_normalization import RowNormalization
+from composes.composition.weighted_additive import WeightedAdditive
+from composes.composition.multiplicative import Multiplicative
 
 
 def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space, 
@@ -74,8 +76,12 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
             #print "missing word:", syntactic_node._word
             matrix_type = type(vector_space.cooccurrence_matrix)
             vector_shape = (1,vector_space.cooccurrence_matrix.shape[1])
-            new_node._vector =  matrix_type(np.zeros(vector_shape,
-                                                     dtype=np.float))
+            if isinstance(composition_model, Multiplicative):
+                new_node._vector =  matrix_type(np.ones(vector_shape,
+                                                         dtype=np.float))
+            else:
+                new_node._vector =  matrix_type(np.zeros(vector_shape,
+                                                         dtype=np.float))
     else:
         for child in syntactic_node._children:
             new_child = _syntactic_node_2_semantic_node(child, vector_space,
