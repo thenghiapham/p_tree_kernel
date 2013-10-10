@@ -13,7 +13,7 @@ from composes.transformation.scaling.row_normalization import RowNormalization
 
 
 def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space, 
-                                   composition_model, normed=False):
+                                   composition_model, normed=True):
     """Create a SemanticTree from a SyntacticTree
     
     Args:
@@ -35,7 +35,7 @@ def syntactic_tree_2_semantic_tree(syntactic_tree, vector_space,
                                                          composition_model, normed))
     
 def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
-                                    composition_model, normed=False):
+                                    composition_model, normed=True):
     """Create a SemanticNode from a SyntacticNode recursively
     
     Args:
