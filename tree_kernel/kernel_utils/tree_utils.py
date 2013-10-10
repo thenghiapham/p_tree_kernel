@@ -89,6 +89,8 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
                                                     new_node.get_child(i).vector)
         
         new_node.vector = new_vector
+    print syntactic_node.get_surface_string()
+    print new_node.vector[0,0]
     return new_node
 
 def penn_pos_2_simple_pos(penn_pos):

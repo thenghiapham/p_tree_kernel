@@ -194,6 +194,15 @@ class SyntacticNode(Node):
                     child_string = child_string + " " + str(child)
                 return "(%s%s)" %(label, child_string)
     
+    def get_surface_string(self):
+        if self.is_terminal():
+            return self.word
+        else:
+            result = self.get_child(0).get_surface_string()
+            for i in range(1,self.get_child_number()):
+                result = result + " %s" %self.get_child(i).get_surface_string()
+            return result
+    
     
     # define all attributes    
     def get_label(self):

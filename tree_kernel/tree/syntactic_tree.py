@@ -180,16 +180,7 @@ class SyntacticTree(object):
         return SyntacticNode(label, word=word, pos=label)
     
     def get_surface_string(self):
-        return self._get_surface_string(self.root) 
-    
-    def _get_surface_string(self, node):
-        if node.is_terminal():
-            return node.word
-        else:
-            result = self._get_surface_string(node.get_child(0))
-            for i in range(1,node.get_child_number()):
-                result = result + " %s" %self._get_surface_string(node.get_child(i))
-            return result
+        return self.root.get_surface_string() 
     
     def __str__(self):
         """Get the string representation of a tree
