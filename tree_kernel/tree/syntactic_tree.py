@@ -184,7 +184,7 @@ class SyntacticTree(object):
     
     def _get_surface_string(self, node):
         if node.is_terminal():
-            return node.lemma
+            return node.word
         else:
             result = self._get_surface_string(node.get_child(0))
             for i in range(1,node.get_child_number()):
