@@ -72,7 +72,7 @@ class SemanticNode(SyntacticNode):
 		    if len(temp_numrep)>1:
 			    for x in range(1, (len(temp_numrep))):
 				y = DenseMatrix(temp_numrep[x])
-				y.reshape((3,3))
+				y.reshape((dimensionality,(y.shape[1]/dimensionality)))
 				numrep.append(y)
             if hasattr(syntactic_node, "_lemma"):
                 lemma = syntactic_node.lemma
@@ -151,7 +151,7 @@ class SemanticNode(SyntacticNode):
 	return self._matrep
     matrep = property(get_matrep)
 
-    def get_numrep(self):
+    def get_numrep(self,multiply_matrices=False):
         if len(self._children) == 1:
                         self._numrep = self.get_child(0).get_numrep()
         if len(self._children) == 2 and self._numrep == []:
@@ -167,7 +167,8 @@ class SemanticNode(SyntacticNode):
                                 if x == 0:
                                         self._numrep.append(matrep2[x].__add__(matrep2[arity2] * matrep1[x]))
                                 elif x < len(matrep1):
-                                        self._numrep.append(matrep2[x] * matrep1[x])
+                                        if multiply_matrices: self._numrep.append(matrep2[x] * matrep1[x])
+					else: self._numrep.append(matrep1[x].__add__(matrep2[x]))
                                 else:
                                         self._numrep.append(matrep2[x])
 		if arity1 > arity2 and not matrep2==[]:
@@ -175,7 +176,8 @@ class SemanticNode(SyntacticNode):
                                 if x == 0:
                                         self._numrep.append(matrep1[x].__add__(matrep1[arity1]*matrep2[x]))
                                 elif x < len(matrep2):
-                                        self._numrep.append(matrep1[x] * matrep2[x])
+                                         if multiply_matrices: self._numrep.append(matrep2[x] * matrep1[x])
+	                                 else: self._numrep.append(matrep1[x].__add__(matrep2[x]))
                                 else:
                                         self._numrep.append(matrep1[x])
                 if (matrep1 == []): self._numrep = matrep2
