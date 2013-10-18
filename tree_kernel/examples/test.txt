@@ -1,0 +1,1000 @@
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="Somebody" lemma="somebody" pos="DT" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+    <lf start="2" span="1" word="singing" lemma="sing" pos="VBG" chunk="I-VP" entity="O" cat="S[ng]\NP" />
+   </rule>
+  </rule>
+  <lf start="3" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+Somebody somebody DT NP ['somebody-n.lexvec'] ['somebody-n.onevec']
+is be VBZ (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+singing sing VBG S[ng]\NP ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="Somebody" lemma="somebody" pos="DT" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+    <rule type="fa" cat="S[ng]\NP">
+     <lf start="2" span="1" word="singing" lemma="sing" pos="VBG" chunk="I-VP" entity="O" cat="(S[ng]\NP)/NP" />
+     <rule type="lex" cat="NP">
+      <lf start="3" span="1" word="songs" lemma="song" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="4" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+Somebody somebody DT NP ['somebody-n.lexvec'] ['somebody-n.onevec']
+is be VBZ (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+singing sing VBG (S[ng]\NP)/NP ['sing-v.lexvec', 'sing-v.subjmat', 'sing-v.objmat'] ['sing-v.zerovec', 'sing-v.identmat', 'sing-v.identmat']
+songs song NNS N ['song-n.lexvec'] ['song-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="lex" cat="NP">
+    <lf start="0" span="1" word="Songs" lemma="song" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="are" lemma="be" pos="VBP" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[pss]\NP)" />
+    <lf start="2" span="1" word="sung" lemma="sing" pos="VBN" chunk="I-VP" entity="O" cat="S[pss]\NP" />
+   </rule>
+  </rule>
+  <lf start="3" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+Songs song NNS N ['song-n.lexvec'] ['song-n.onevec']
+are be VBP (S[dcl]\NP)/(S[pss]\NP) ['be-v.empty'] ['be-v.empty']
+sung sing VBN S[pss]\NP ['sing-v.lexvec', 'sing-v.objmat'] ['sing-v.zerovec', 'sing-v.identmat']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="lex" cat="NP">
+    <lf start="0" span="1" word="Songs" lemma="song" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="are" lemma="be" pos="VBP" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[pss]\NP)" />
+    <rule type="ba" cat="S[pss]\NP">
+     <lf start="2" span="1" word="sung" lemma="sing" pos="VBN" chunk="I-VP" entity="O" cat="S[pss]\NP" />
+     <rule type="fa" cat="(S[X]\NP)\(S[X]\NP)">
+      <lf start="3" span="1" word="by" lemma="by" pos="IN" chunk="I-PP" entity="O" cat="((S\NP)\(S\NP))/NP" />
+      <lf start="4" span="1" word="somebody" lemma="somebody" pos="DT" chunk="I-NP" entity="O" cat="NP" />
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+Songs song NNS N ['song-n.lexvec'] ['song-n.onevec']
+are be VBP (S[dcl]\NP)/(S[pss]\NP) ['be-v.empty'] ['be-v.empty']
+sung sing VBN S[pss]\NP ['sing-v.lexvec', 'sing-v.objmat'] ['sing-v.zerovec', 'sing-v.identmat']
+by by IN ((S\NP)\(S\NP))/NP ['by-p.lexvec', 'by-p.zeromat', 'by-p.lexmat'] ['by-p.zerovec', 'by-p.zeromat', 'by-p.identmat']
+somebody somebody DT NP ['somebody-n.lexvec'] ['somebody-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="lex" cat="NP">
+    <lf start="0" span="1" word="Songs" lemma="song" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="are" lemma="be" pos="VBP" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[pss]\NP)" />
+    <rule type="ba" cat="S[pss]\NP">
+     <lf start="2" span="1" word="sung" lemma="sing" pos="VBN" chunk="I-VP" entity="O" cat="S[pss]\NP" />
+     <rule type="fa" cat="(S[X]\NP)\(S[X]\NP)">
+      <lf start="3" span="1" word="in" lemma="in" pos="IN" chunk="I-PP" entity="O" cat="((S\NP)\(S\NP))/NP" />
+      <rule type="lex" cat="NP">
+       <lf start="4" span="1" word="parks" lemma="park" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+      </rule>
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+Songs song NNS N ['song-n.lexvec'] ['song-n.onevec']
+are be VBP (S[dcl]\NP)/(S[pss]\NP) ['be-v.empty'] ['be-v.empty']
+sung sing VBN S[pss]\NP ['sing-v.lexvec', 'sing-v.objmat'] ['sing-v.zerovec', 'sing-v.identmat']
+in in IN ((S\NP)\(S\NP))/NP ['in-p.lexvec', 'in-p.zeromat', 'in-p.lexmat'] ['in-p.zerovec', 'in-p.zeromat', 'in-p.identmat']
+parks park NNS N ['park-n.lexvec'] ['park-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="gave" lemma="give" pos="VBD" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/NP" />
+    <rule type="lex" cat="NP">
+     <lf start="2" span="1" word="books" lemma="book" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+   </rule>
+  </rule>
+  <lf start="3" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+gave give VBD (S[dcl]\NP)/NP ['give-v.lexvec', 'give-v.subjmat', 'give-v.objmat'] ['give-v.zerovec', 'give-v.identmat', 'give-v.identmat']
+books book NNS N ['book-n.lexvec'] ['book-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <rule type="fa" cat="(S[dcl]\NP)/PP">
+     <lf start="1" span="1" word="gave" lemma="give" pos="VBD" chunk="I-VP" entity="O" cat="((S[dcl]\NP)/PP)/NP" />
+     <rule type="lex" cat="NP">
+      <lf start="2" span="1" word="books" lemma="book" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+     </rule>
+    </rule>
+    <rule type="fa" cat="PP">
+     <lf start="3" span="1" word="to" lemma="to" pos="TO" chunk="I-PP" entity="O" cat="PP/NP" />
+     <lf start="4" span="1" word="somebody" lemma="somebody" pos="DT" chunk="I-NP" entity="O" cat="NP" />
+    </rule>
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+gave give VBD ((S[dcl]\NP)/PP)/NP ['give-v.lexvec', 'give-v.subjmat', 'give-v.objmat'] ['give-v.zerovec', 'give-v.identmat', 'give-v.identmat']
+to to TO PP/NP ['to-p.lexvec', 'to-p.zeromat', 'to-p.lexmat'] ['to-p.zerovec', 'to-p.zeromat', 'to-p.identmat']
+somebody somebody DT NP ['somebody-n.lexvec'] ['somebody-n.onevec']
+books book NNS N ['book-n.lexvec'] ['book-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <rule type="fa" cat="(S[dcl]\NP)/PP">
+     <lf start="1" span="1" word="confessed" lemma="confess" pos="VBD" chunk="I-VP" entity="O" cat="((S[dcl]\NP)/PP)/NP" />
+     <rule type="lex" cat="NP">
+      <lf start="2" span="1" word="secrets" lemma="secret" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+     </rule>
+    </rule>
+    <rule type="fa" cat="PP">
+     <lf start="3" span="1" word="to" lemma="to" pos="TO" chunk="I-PP" entity="O" cat="PP/NP" />
+     <lf start="4" span="1" word="me" lemma="I" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+    </rule>
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+confessed confess VBD ((S[dcl]\NP)/PP)/NP ['confess-v.lexvec', 'confess-v.subjmat', 'confess-v.objmat'] ['confess-v.zerovec', 'confess-v.identmat', 'confess-v.identmat']
+to to TO PP/NP ['to-p.lexvec', 'to-p.zeromat', 'to-p.lexmat'] ['to-p.zerovec', 'to-p.zeromat', 'to-p.identmat']
+me I PRP NP ['I-n.onevec'] ['I-n.onevec']
+secrets secret NNS N ['secret-n.lexvec'] ['secret-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <rule type="fa" cat="(S[dcl]\NP)/NP">
+     <lf start="1" span="1" word="gave" lemma="give" pos="VBD" chunk="I-VP" entity="O" cat="((S[dcl]\NP)/NP)/NP" />
+     <lf start="2" span="1" word="him" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+    </rule>
+    <rule type="fa" cat="NP[nb]">
+     <lf start="3" span="1" word="the" lemma="the" pos="DT" chunk="B-NP" entity="O" cat="NP[nb]/N" />
+     <lf start="4" span="1" word="book" lemma="book" pos="NN" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+gave give VBD ((S[dcl]\NP)/NP)/NP ['give-v.lexvec', 'give-v.subjmat', 'give-v.objmat', 'give-v.zeromat'] ['give-v.zerovec', 'give-v.identmat', 'give-v.identmat', 'give-v.zeromat']
+him he PRP NP ['he-n.onevec'] ['he-n.onevec']
+the the DT NP[nb]/N ['the-d.lexvec', 'the-d.lexmat'] ['the-d.zerovec', 'the-d.identmat']
+book book NN N ['book-n.lexvec'] ['book-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="ba" cat="S[dcl]\NP">
+    <rule type="fa" cat="S[dcl]\NP">
+     <lf start="1" span="1" word="visited" lemma="visit" pos="VBD" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/NP" />
+     <rule type="lex" cat="NP">
+      <lf start="2" span="1" word="London" lemma="London" pos="NNP" chunk="I-NP" entity="I-LOC" cat="N" />
+     </rule>
+    </rule>
+    <rule type="fa" cat="(S[X]\NP)\(S[X]\NP)">
+     <lf start="3" span="1" word="with" lemma="with" pos="IN" chunk="I-PP" entity="O" cat="((S\NP)\(S\NP))/NP" />
+     <lf start="4" span="1" word="me" lemma="I" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+    </rule>
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+visited visit VBD (S[dcl]\NP)/NP ['visit-v.lexvec', 'visit-v.subjmat', 'visit-v.objmat'] ['visit-v.zerovec', 'visit-v.identmat', 'visit-v.identmat']
+with with IN ((S\NP)\(S\NP))/NP ['with-p.lexvec', 'with-p.zeromat', 'with-p.lexmat'] ['with-p.zerovec', 'with-p.zeromat', 'with-p.identmat']
+me I PRP NP ['I-n.onevec'] ['I-n.onevec']
+London London NNP N ['London-n.lexvec'] ['London-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <rule type="bx" cat="(S[dcl]\NP)/(S[b]\NP)">
+     <lf start="1" span="1" word="did" lemma="do" pos="VBD" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[b]\NP)" />
+     <lf start="2" span="1" word="not" lemma="not" pos="RB" chunk="I-VP" entity="O" cat="(S\NP)\(S\NP)" />
+    </rule>
+    <rule type="fa" cat="S[b]\NP">
+     <lf start="3" span="1" word="visit" lemma="visit" pos="VB" chunk="I-VP" entity="O" cat="(S[b]\NP)/NP" />
+     <rule type="lex" cat="NP">
+      <lf start="4" span="1" word="London" lemma="London" pos="NNP" chunk="I-NP" entity="I-LOC" cat="N" />
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+did do VBD (S[dcl]\NP)/(S[b]\NP) ['do-v.empty'] ['do-v.empty']
+not not RB (S\NP)\(S\NP) ['not-r.lexvec', 'not-r.zeromat', 'not-r.lexmat'] ['not-r.empty']
+visit visit VB (S[b]\NP)/NP ['visit-v.lexvec', 'visit-v.subjmat', 'visit-v.objmat'] ['visit-v.zerovec', 'visit-v.identmat', 'visit-v.identmat']
+London London NNP N ['London-n.lexvec'] ['London-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <rule type="bx" cat="(S[dcl]\NP)/(S[b]\NP)">
+     <lf start="1" span="1" word="did" lemma="do" pos="VBD" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[b]\NP)" />
+     <lf start="2" span="1" word="not" lemma="not" pos="RB" chunk="I-VP" entity="O" cat="(S\NP)\(S\NP)" />
+    </rule>
+    <lf start="3" span="1" word="sing" lemma="sing" pos="VB" chunk="I-VP" entity="O" cat="S[b]\NP" />
+   </rule>
+  </rule>
+  <lf start="4" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+sing sing VB S[b]\NP ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+did do VBD (S[dcl]\NP)/(S[b]\NP) ['do-v.empty'] ['do-v.empty']
+not not RB (S\NP)\(S\NP) ['not-r.lexvec', 'not-r.zeromat', 'not-r.lexmat'] ['not-r.empty']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[adj]\NP)" />
+    <rule type="fa" cat="S[adj]\NP">
+     <lf start="2" span="1" word="not" lemma="not" pos="RB" chunk="I-ADJP" entity="O" cat="(S[adj]\NP)/(S[adj]\NP)" />
+     <lf start="3" span="1" word="happy" lemma="happy" pos="JJ" chunk="I-ADJP" entity="O" cat="S[adj]\NP" />
+    </rule>
+   </rule>
+  </rule>
+  <lf start="4" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+is be VBZ (S[dcl]\NP)/(S[adj]\NP) ['be-v.empty'] ['be-v.empty']
+not not RB (S[adj]\NP)/(S[adj]\NP) ['not-r.lexvec', 'not-r.zeromat', 'not-r.lexmat'] ['not-r.empty']
+happy happy JJ S[adj]\NP ['happy-j.lexvec', 'happy-j.lexmat'] ['happy-j.zerovec', 'happy-j.identmat']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="ba" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="sang" lemma="sing" pos="VBD" chunk="I-VP" entity="O" cat="S[dcl]\NP" />
+    <rule type="fa" cat="(S[X]\NP)\(S[X]\NP)">
+     <lf start="2" span="1" word="with" lemma="with" pos="IN" chunk="I-PP" entity="O" cat="((S\NP)\(S\NP))/NP" />
+     <rule type="lex" cat="NP">
+      <lf start="3" span="1" word="passion" lemma="passion" pos="NN" chunk="I-NP" entity="O" cat="N" />
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="4" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+sang sing VBD S[dcl]\NP ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+with with IN ((S\NP)\(S\NP))/NP ['with-p.lexvec', 'with-p.zeromat', 'with-p.lexmat'] ['with-p.zerovec', 'with-p.zeromat', 'with-p.identmat']
+passion passion NN N ['passion-n.lexvec'] ['passion-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="ba" cat="S[dcl]\NP">
+    <rule type="fa" cat="S[dcl]\NP">
+     <lf start="1" span="1" word="sang" lemma="sing" pos="VBD" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/NP" />
+     <rule type="lex" cat="NP">
+      <lf start="2" span="1" word="songs" lemma="song" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+     </rule>
+    </rule>
+    <rule type="fa" cat="(S[X]\NP)\(S[X]\NP)">
+     <lf start="3" span="1" word="with" lemma="with" pos="IN" chunk="I-PP" entity="O" cat="((S\NP)\(S\NP))/NP" />
+     <rule type="lex" cat="NP">
+      <lf start="4" span="1" word="passion" lemma="passion" pos="NN" chunk="I-NP" entity="O" cat="N" />
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+sang sing VBD (S[dcl]\NP)/NP ['sing-v.lexvec', 'sing-v.subjmat', 'sing-v.objmat'] ['sing-v.zerovec', 'sing-v.identmat', 'sing-v.identmat']
+with with IN ((S\NP)\(S\NP))/NP ['with-p.lexvec', 'with-p.zeromat', 'with-p.lexmat'] ['with-p.zerovec', 'with-p.zeromat', 'with-p.identmat']
+songs song NNS N ['song-n.lexvec'] ['song-n.onevec']
+passion passion NN N ['passion-n.lexvec'] ['passion-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="ba" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="sang" lemma="sing" pos="VBD" chunk="I-VP" entity="O" cat="S[dcl]\NP" />
+    <lf start="2" span="1" word="happily" lemma="happily" pos="RB" chunk="I-ADVP" entity="O" cat="(S\NP)\(S\NP)" />
+   </rule>
+  </rule>
+  <lf start="3" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+sang sing VBD S[dcl]\NP ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+happily happily RB (S\NP)\(S\NP) ['happily-r.lexvec', 'happily-r.zeromat', 'happily-r.lexmat'] ['happily-r.empty']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="happily" lemma="happily" pos="RB" chunk="I-ADVP" entity="O" cat="(S\NP)/(S\NP)" />
+    <lf start="2" span="1" word="sang" lemma="sing" pos="VBD" chunk="I-VP" entity="O" cat="S[dcl]\NP" />
+   </rule>
+  </rule>
+  <lf start="3" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+happily happily RB (S\NP)/(S\NP) ['happily-r.lexvec', 'happily-r.zeromat', 'happily-r.lexmat'] ['happily-r.empty']
+sang sing VBD S[dcl]\NP ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="ba" cat="S[dcl]">
+    <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+    <rule type="fa" cat="S[dcl]\NP">
+     <lf start="1" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+     <lf start="2" span="1" word="singing" lemma="sing" pos="VBG" chunk="I-VP" entity="O" cat="S[ng]\NP" />
+    </rule>
+   </rule>
+   <rule type="conj" cat="S[dcl]\S[dcl]">
+    <lf start="3" span="1" word="and" lemma="and" pos="CC" chunk="O" entity="O" cat="conj" />
+    <rule type="ba" cat="S[dcl]">
+     <lf start="4" span="1" word="she" lemma="she" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+     <rule type="fa" cat="S[dcl]\NP">
+      <lf start="5" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+      <rule type="fa" cat="S[ng]\NP">
+       <lf start="6" span="1" word="dancing" lemma="dance" pos="VBG" chunk="I-VP" entity="O" cat="(S[ng]\NP)/NP" />
+       <rule type="lex" cat="NP">
+        <lf start="7" span="1" word="tunes" lemma="tune" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+       </rule>
+      </rule>
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="8" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+and and CC conj ['and-o.empty'] ['and-o.empty']
+is be VBZ (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+singing sing VBG S[ng]\NP ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+she she PRP NP ['she-n.onevec'] ['she-n.onevec']
+is be VBZ (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+dancing dance VBG (S[ng]\NP)/NP ['dance-v.lexvec', 'dance-v.subjmat', 'dance-v.objmat'] ['dance-v.zerovec', 'dance-v.identmat', 'dance-v.identmat']
+tunes tune NNS N ['tune-n.lexvec'] ['tune-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="ba" cat="S[dcl]">
+    <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+    <rule type="fa" cat="S[dcl]\NP">
+     <lf start="1" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+     <lf start="2" span="1" word="sleeping" lemma="sleep" pos="VBG" chunk="I-VP" entity="O" cat="S[ng]\NP" />
+    </rule>
+   </rule>
+   <rule type="conj" cat="S[dcl]\S[dcl]">
+    <lf start="3" span="1" word="and" lemma="and" pos="CC" chunk="O" entity="O" cat="conj" />
+    <rule type="ba" cat="S[dcl]">
+     <lf start="4" span="1" word="she" lemma="she" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+     <rule type="fa" cat="S[dcl]\NP">
+      <lf start="5" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+      <rule type="fa" cat="S[ng]\NP">
+       <lf start="6" span="1" word="dancing" lemma="dance" pos="VBG" chunk="I-VP" entity="O" cat="(S[ng]\NP)/NP" />
+       <rule type="lex" cat="NP">
+        <lf start="7" span="1" word="tunes" lemma="tune" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+       </rule>
+      </rule>
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="8" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+and and CC conj ['and-o.empty'] ['and-o.empty']
+is be VBZ (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+sleeping sleep VBG S[ng]\NP ['sleep-v.lexvec', 'sleep-v.subjmat'] ['sleep-v.zerovec', 'sleep-v.identmat']
+she she PRP NP ['she-n.onevec'] ['she-n.onevec']
+is be VBZ (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+dancing dance VBG (S[ng]\NP)/NP ['dance-v.lexvec', 'dance-v.subjmat', 'dance-v.objmat'] ['dance-v.zerovec', 'dance-v.identmat', 'dance-v.identmat']
+tunes tune NNS N ['tune-n.lexvec'] ['tune-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+    <rule type="ba" cat="S[ng]\NP">
+     <rule type="fa" cat="S[ng]\NP">
+      <lf start="2" span="1" word="cutting" lemma="cut" pos="VBG" chunk="I-VP" entity="O" cat="(S[ng]\NP)/NP" />
+      <rule type="lex" cat="NP">
+       <rule type="funny" cat="N">
+        <lf start="3" span="1" word="and" lemma="and" pos="CC" chunk="O" entity="O" cat="conj" />
+        <lf start="4" span="1" word="she" lemma="she" pos="PRP" chunk="I-NP" entity="O" cat="N" />
+       </rule>
+      </rule>
+     </rule>
+     <rule type="fa" cat="(S[X]\NP)\(S[X]\NP)">
+      <lf start="5" span="1" word="cooking" lemma="cooking" pos="JJ" chunk="I-NP" entity="O" cat="((S\NP)\(S\NP))/((S\NP)\(S\NP))" />
+      <lf start="6" span="1" word="carrots" lemma="carrot" pos="NNS" chunk="I-NP" entity="O" cat="(S\NP)\(S\NP)" />
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="7" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+is be VBZ (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+cutting cut VBG (S[ng]\NP)/NP ['cut-v.lexvec', 'cut-v.subjmat', 'cut-v.objmat'] ['cut-v.zerovec', 'cut-v.identmat', 'cut-v.identmat']
+cooking cooking JJ ((S\NP)\(S\NP))/((S\NP)\(S\NP)) ['cooking-j.lexvec', 'cooking-j.lexmat'] ['cooking-j.zerovec', 'cooking-j.identmat']
+carrots carrot NNS (S\NP)\(S\NP) ['carrot-n.lexvec'] ['carrot-n.onevec']
+and and CC conj ['and-o.empty'] ['and-o.empty']
+she she PRP N ['she-n.onevec'] ['she-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="fa" cat="S[dcl]">
+   <rule type="ba" cat="S[dcl]/NP">
+    <rule type="fc" cat="S[dcl]/NP">
+     <rule type="tr" cat="S[X]/(S[X]\NP)">
+      <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+     </rule>
+     <rule type="fc" cat="(S[dcl]\NP)/NP">
+      <lf start="1" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+      <lf start="2" span="1" word="cutting" lemma="cut" pos="VBG" chunk="I-VP" entity="O" cat="(S[ng]\NP)/NP" />
+     </rule>
+    </rule>
+    <rule type="conj" cat="(S[dcl]/NP)\(S[dcl]/NP)">
+     <lf start="3" span="1" word="and" lemma="and" pos="CC" chunk="O" entity="O" cat="conj" />
+     <rule type="fc" cat="S[dcl]/NP">
+      <rule type="tr" cat="S[X]/(S[X]\NP)">
+       <lf start="4" span="1" word="she" lemma="she" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+      </rule>
+      <lf start="5" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/NP" />
+     </rule>
+    </rule>
+   </rule>
+   <rule type="lex" cat="NP">
+    <rule type="fa" cat="N">
+     <lf start="6" span="1" word="cooking" lemma="cooking" pos="JJ" chunk="I-NP" entity="O" cat="N/N" />
+     <lf start="7" span="1" word="carrots" lemma="carrot" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+   </rule>
+  </rule>
+  <lf start="8" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+and and CC conj ['and-o.empty'] ['and-o.empty']
+cooking cooking JJ N/N ['cooking-j.lexvec', 'cooking-j.lexmat'] ['cooking-j.zerovec', 'cooking-j.identmat']
+carrots carrot NNS N ['carrot-n.lexvec'] ['carrot-n.onevec']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+is be VBZ (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+cutting cut VBG (S[ng]\NP)/NP ['cut-v.lexvec', 'cut-v.subjmat', 'cut-v.objmat'] ['cut-v.zerovec', 'cut-v.identmat', 'cut-v.identmat']
+is be VBZ (S[dcl]\NP)/NP ['be-v.lexvec', 'be-v.subjmat', 'be-v.objmat'] ['be-v.zerovec', 'be-v.identmat', 'be-v.identmat']
+she she PRP NP ['she-n.onevec'] ['she-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="lex" cat="NP">
+    <rule type="fa" cat="N">
+     <lf start="0" span="1" word="Dried" lemma="dried" pos="JJ" chunk="I-NP" entity="O" cat="N/N" />
+     <lf start="1" span="1" word="carrots" lemma="carrot" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="2" span="1" word="are" lemma="be" pos="VBP" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[adj]\NP)" />
+    <lf start="3" span="1" word="good" lemma="good" pos="JJ" chunk="I-ADJP" entity="O" cat="S[adj]\NP" />
+   </rule>
+  </rule>
+  <lf start="4" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+are be VBP (S[dcl]\NP)/(S[adj]\NP) ['be-v.empty'] ['be-v.empty']
+good good JJ S[adj]\NP ['good-j.lexvec', 'good-j.lexmat'] ['good-j.zerovec', 'good-j.identmat']
+Dried dried JJ N/N ['dried-j.lexvec', 'dried-j.lexmat'] ['dried-j.zerovec', 'dried-j.identmat']
+carrots carrot NNS N ['carrot-n.lexvec'] ['carrot-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="lex" cat="NP">
+    <rule type="fa" cat="S[ng]\NP">
+     <lf start="0" span="1" word="Cutting" lemma="cut" pos="VBG" chunk="I-NP" entity="O" cat="(S[ng]\NP)/NP" />
+     <rule type="lex" cat="NP">
+      <lf start="1" span="1" word="carrots" lemma="carrot" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+     </rule>
+    </rule>
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="2" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[adj]\NP)" />
+    <lf start="3" span="1" word="good" lemma="good" pos="JJ" chunk="I-ADJP" entity="O" cat="S[adj]\NP" />
+   </rule>
+  </rule>
+  <lf start="4" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+is be VBZ (S[dcl]\NP)/(S[adj]\NP) ['be-v.empty'] ['be-v.empty']
+good good JJ S[adj]\NP ['good-j.lexvec', 'good-j.lexmat'] ['good-j.zerovec', 'good-j.identmat']
+Cutting cut VBG (S[ng]\NP)/NP ['cut-v.lexvec', 'cut-v.subjmat', 'cut-v.objmat'] ['cut-v.zerovec', 'cut-v.identmat', 'cut-v.identmat']
+carrots carrot NNS N ['carrot-n.lexvec'] ['carrot-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="lex" cat="NP">
+    <rule type="fa" cat="N">
+     <lf start="0" span="1" word="Singing" lemma="sing" pos="VBG" chunk="I-NP" entity="O" cat="N/N" />
+     <lf start="1" span="1" word="people" lemma="people" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="2" span="1" word="are" lemma="be" pos="VBP" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[adj]\NP)" />
+    <lf start="3" span="1" word="here" lemma="here" pos="RB" chunk="I-ADVP" entity="O" cat="S[adj]\NP" />
+   </rule>
+  </rule>
+  <lf start="4" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+are be VBP (S[dcl]\NP)/(S[adj]\NP) ['be-v.empty'] ['be-v.empty']
+here here RB S[adj]\NP ['here-r.lexvec', 'here-r.zeromat', 'here-r.lexmat'] ['here-r.empty']
+Singing sing VBG N/N ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+people people NNS N ['people-n.lexvec'] ['people-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="lex" cat="NP">
+    <rule type="fa" cat="N">
+     <lf start="0" span="1" word="Killed" lemma="kill" pos="VBN" chunk="I-NP" entity="O" cat="N/N" />
+     <lf start="1" span="1" word="people" lemma="people" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="2" span="1" word="are" lemma="be" pos="VBP" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[adj]\NP)" />
+    <lf start="3" span="1" word="sad" lemma="sad" pos="JJ" chunk="I-ADJP" entity="O" cat="S[adj]\NP" />
+   </rule>
+  </rule>
+  <lf start="4" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+are be VBP (S[dcl]\NP)/(S[adj]\NP) ['be-v.empty'] ['be-v.empty']
+sad sad JJ S[adj]\NP ['sad-j.lexvec', 'sad-j.lexmat'] ['sad-j.zerovec', 'sad-j.identmat']
+Killed kill VBN N/N ['kill-v.lexvec', 'kill-v.objmat'] ['kill-v.zerovec', 'kill-v.identmat']
+people people NNS N ['people-n.lexvec'] ['people-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="fa" cat="S[dcl]">
+   <rule type="tr" cat="S[X]/(S[X]/NP)">
+    <rule type="lex" cat="NP">
+     <lf start="0" span="1" word="Happily," lemma="Happily," pos="NNP" chunk="I-NP" entity="I-LOC" cat="N" />
+    </rule>
+   </rule>
+   <rule type="fc" cat="S[dcl]/NP">
+    <rule type="tr" cat="S[X]/(S[X]\NP)">
+     <lf start="1" span="1" word="he" lemma="he" pos="PRP" chunk="B-NP" entity="O" cat="NP" />
+    </rule>
+    <lf start="2" span="1" word="sang" lemma="sing" pos="VBD" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/NP" />
+   </rule>
+  </rule>
+  <lf start="3" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+sang sing VBD (S[dcl]\NP)/NP ['sing-v.lexvec', 'sing-v.subjmat', 'sing-v.objmat'] ['sing-v.zerovec', 'sing-v.identmat', 'sing-v.identmat']
+Happily, Happily, NNP N ['Happily,-n.lexvec'] ['Happily,-n.onevec']
+he he PRP NP ['he-n.onevec'] ['he-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="fa" cat="S[dcl]">
+   <lf start="0" span="1" word="Sadly" lemma="sadly" pos="RB" chunk="I-ADVP" entity="O" cat="S/S" />
+   <rule type="ba" cat="S[dcl]">
+    <lf start="1" span="1" word="he" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+    <lf start="2" span="1" word="sang" lemma="sing" pos="VBD" chunk="I-VP" entity="O" cat="S[dcl]\NP" />
+   </rule>
+  </rule>
+  <lf start="3" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+Sadly sadly RB S/S ['sadly-r.lexvec', 'sadly-r.lexmat'] ['sadly-r.empty']
+he he PRP NP ['he-n.onevec'] ['he-n.onevec']
+sang sing VBD S[dcl]\NP ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="ba" cat="NP">
+    <rule type="fa" cat="NP[nb]">
+     <lf start="0" span="1" word="The" lemma="the" pos="DT" chunk="I-NP" entity="O" cat="NP[nb]/N" />
+     <lf start="1" span="1" word="boy" lemma="boy" pos="NN" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+    <rule type="fa" cat="NP\NP">
+     <lf start="2" span="1" word="in" lemma="in" pos="IN" chunk="I-PP" entity="O" cat="(NP\NP)/NP" />
+     <rule type="fa" cat="NP[nb]">
+      <lf start="3" span="1" word="the" lemma="the" pos="DT" chunk="I-NP" entity="O" cat="NP[nb]/N" />
+      <lf start="4" span="1" word="park" lemma="park" pos="NN" chunk="I-NP" entity="O" cat="N" />
+     </rule>
+    </rule>
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="5" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+    <lf start="6" span="1" word="singing" lemma="sing" pos="VBG" chunk="I-VP" entity="O" cat="S[ng]\NP" />
+   </rule>
+  </rule>
+  <lf start="7" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+is be VBZ (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+singing sing VBG S[ng]\NP ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+The the DT NP[nb]/N ['the-d.lexvec', 'the-d.lexmat'] ['the-d.zerovec', 'the-d.identmat']
+boy boy NN N ['boy-n.lexvec'] ['boy-n.onevec']
+in in IN (NP\NP)/NP ['in-p.lexvec', 'in-p.lexmat'] ['in-p.zerovec', 'in-p.identmat']
+the the DT NP[nb]/N ['the-d.lexvec', 'the-d.lexmat'] ['the-d.zerovec', 'the-d.identmat']
+park park NN N ['park-n.lexvec'] ['park-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="fa" cat="NP[nb]">
+    <lf start="0" span="1" word="The" lemma="the" pos="DT" chunk="I-NP" entity="O" cat="NP[nb]/N" />
+    <lf start="1" span="1" word="boy" lemma="boy" pos="NN" chunk="I-NP" entity="O" cat="N" />
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="2" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+    <rule type="ba" cat="S[ng]\NP">
+     <lf start="3" span="1" word="singing" lemma="sing" pos="VBG" chunk="I-VP" entity="O" cat="S[ng]\NP" />
+     <rule type="fa" cat="(S[X]\NP)\(S[X]\NP)">
+      <lf start="4" span="1" word="in" lemma="in" pos="IN" chunk="I-PP" entity="O" cat="((S\NP)\(S\NP))/NP" />
+      <rule type="fa" cat="NP[nb]">
+       <lf start="5" span="1" word="the" lemma="the" pos="DT" chunk="I-NP" entity="O" cat="NP[nb]/N" />
+       <lf start="6" span="1" word="park" lemma="park" pos="NN" chunk="I-NP" entity="O" cat="N" />
+      </rule>
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="7" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+The the DT NP[nb]/N ['the-d.lexvec', 'the-d.lexmat'] ['the-d.zerovec', 'the-d.identmat']
+boy boy NN N ['boy-n.lexvec'] ['boy-n.onevec']
+is be VBZ (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+singing sing VBG S[ng]\NP ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+in in IN ((S\NP)\(S\NP))/NP ['in-p.lexvec', 'in-p.zeromat', 'in-p.lexmat'] ['in-p.zerovec', 'in-p.zeromat', 'in-p.identmat']
+the the DT NP[nb]/N ['the-d.lexvec', 'the-d.lexmat'] ['the-d.zerovec', 'the-d.identmat']
+park park NN N ['park-n.lexvec'] ['park-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="fa" cat="S[dcl]">
+   <rule type="fa" cat="S[X]/S[X]">
+    <lf start="0" span="1" word="In" lemma="in" pos="IN" chunk="I-PP" entity="O" cat="(S/S)/NP" />
+    <rule type="fa" cat="NP[nb]">
+     <lf start="1" span="1" word="the" lemma="the" pos="DT" chunk="I-NP" entity="O" cat="NP[nb]/N" />
+     <lf start="2" span="1" word="park" lemma="park" pos="NN" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+   </rule>
+   <rule type="ba" cat="S[dcl]">
+    <rule type="lex" cat="NP">
+     <lf start="3" span="1" word="boys" lemma="boy" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+    <rule type="fa" cat="S[dcl]\NP">
+     <lf start="4" span="1" word="are" lemma="be" pos="VBP" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+     <lf start="5" span="1" word="singing" lemma="sing" pos="VBG" chunk="I-VP" entity="O" cat="S[ng]\NP" />
+    </rule>
+   </rule>
+  </rule>
+  <lf start="6" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+In in IN (S/S)/NP ['in-p.lexvec', 'in-p.lexmat'] ['in-p.zerovec', 'in-p.identmat']
+the the DT NP[nb]/N ['the-d.lexvec', 'the-d.lexmat'] ['the-d.zerovec', 'the-d.identmat']
+park park NN N ['park-n.lexvec'] ['park-n.onevec']
+boys boy NNS N ['boy-n.lexvec'] ['boy-n.onevec']
+are be VBP (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+singing sing VBG S[ng]\NP ['sing-v.lexvec', 'sing-v.subjmat'] ['sing-v.zerovec', 'sing-v.identmat']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="fa" cat="NP[nb]">
+    <lf start="0" span="1" word="The" lemma="the" pos="DT" chunk="I-NP" entity="O" cat="NP[nb]/N" />
+    <lf start="1" span="1" word="boy" lemma="boy" pos="NN" chunk="I-NP" entity="O" cat="N" />
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="2" span="1" word="is" lemma="be" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/PP" />
+    <rule type="fa" cat="PP">
+     <lf start="3" span="1" word="in" lemma="in" pos="IN" chunk="I-PP" entity="O" cat="PP/NP" />
+     <rule type="fa" cat="NP[nb]">
+      <lf start="4" span="1" word="the" lemma="the" pos="DT" chunk="I-NP" entity="O" cat="NP[nb]/N" />
+      <lf start="5" span="1" word="park" lemma="park" pos="NN" chunk="I-NP" entity="O" cat="N" />
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="6" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+The the DT NP[nb]/N ['the-d.lexvec', 'the-d.lexmat'] ['the-d.zerovec', 'the-d.identmat']
+boy boy NN N ['boy-n.lexvec'] ['boy-n.onevec']
+is be VBZ (S[dcl]\NP)/PP ['be-v.zerovec', 'be-v.identmat'] ['be-v.zerovec', 'be-v.identmat']
+in in IN PP/NP ['in-p.lexvec', 'in-p.zeromat', 'in-p.lexmat'] ['in-p.zerovec', 'in-p.zeromat', 'in-p.identmat']
+the the DT NP[nb]/N ['the-d.lexvec', 'the-d.lexmat'] ['the-d.zerovec', 'the-d.identmat']
+park park NN N ['park-n.lexvec'] ['park-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[pss]">
+  <rule type="ba" cat="S[pss]">
+   <rule type="ba" cat="NP">
+    <rule type="lex" cat="NP">
+     <lf start="0" span="1" word="Boys" lemma="boy" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+    <rule type="fa" cat="NP\NP">
+     <lf start="1" span="1" word="who" lemma="who" pos="WP" chunk="B-NP" entity="O" cat="(NP\NP)/(S[dcl]\NP)" />
+     <rule type="fa" cat="S[dcl]\NP">
+      <lf start="2" span="1" word="were" lemma="be" pos="VBD" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+      <rule type="fa" cat="S[ng]\NP">
+       <lf start="3" span="1" word="eating" lemma="eat" pos="VBG" chunk="I-VP" entity="O" cat="(S[ng]\NP)/NP" />
+       <rule type="lex" cat="NP">
+        <lf start="4" span="1" word="meat" lemma="meat" pos="NN" chunk="I-NP" entity="O" cat="N" />
+       </rule>
+      </rule>
+     </rule>
+    </rule>
+   </rule>
+   <lf start="5" span="1" word="cried" lemma="cry" pos="VBN" chunk="I-VP" entity="O" cat="S[pss]\NP" />
+  </rule>
+  <lf start="6" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+cried cry VBN S[pss]\NP ['cry-v.lexvec', 'cry-v.objmat'] ['cry-v.zerovec', 'cry-v.identmat']
+Boys boy NNS N ['boy-n.lexvec'] ['boy-n.onevec']
+who who WP (NP\NP)/(S[dcl]\NP) ['who-o.empty'] ['who-o.empty']
+were be VBD (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+eating eat VBG (S[ng]\NP)/NP ['eat-v.lexvec', 'eat-v.subjmat', 'eat-v.objmat'] ['eat-v.zerovec', 'eat-v.identmat', 'eat-v.identmat']
+meat meat NN N ['meat-n.lexvec'] ['meat-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="ba" cat="NP">
+    <rule type="lex" cat="NP">
+     <lf start="0" span="1" word="Meat" lemma="Meat" pos="NNP" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+    <rule type="fa" cat="NP\NP">
+     <lf start="1" span="1" word="that" lemma="that" pos="IN" chunk="I-SBAR" entity="O" cat="(NP\NP)/S[dcl]" />
+     <rule type="ba" cat="S[dcl]">
+      <rule type="lex" cat="NP">
+       <lf start="2" span="1" word="boys" lemma="boy" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+      </rule>
+      <rule type="fa" cat="S[dcl]\NP">
+       <lf start="3" span="1" word="were" lemma="be" pos="VBD" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+       <lf start="4" span="1" word="eating" lemma="eat" pos="VBG" chunk="I-VP" entity="O" cat="S[ng]\NP" />
+      </rule>
+     </rule>
+    </rule>
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="5" span="1" word="was" lemma="be" pos="VBD" chunk="B-VP" entity="O" cat="(S[dcl]\NP)/(S[adj]\NP)" />
+    <lf start="6" span="1" word="bad" lemma="bad" pos="JJ" chunk="I-ADJP" entity="O" cat="S[adj]\NP" />
+   </rule>
+  </rule>
+  <lf start="7" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+was be VBD (S[dcl]\NP)/(S[adj]\NP) ['be-v.empty'] ['be-v.empty']
+bad bad JJ S[adj]\NP ['bad-j.lexvec', 'bad-j.lexmat'] ['bad-j.zerovec', 'bad-j.identmat']
+Meat Meat NNP N ['Meat-n.lexvec'] ['Meat-n.onevec']
+that that IN (NP\NP)/S[dcl] ['that-o.empty'] ['that-o.empty']
+boys boy NNS N ['boy-n.lexvec'] ['boy-n.onevec']
+were be VBD (S[dcl]\NP)/(S[ng]\NP) ['be-v.empty'] ['be-v.empty']
+eating eat VBG S[ng]\NP ['eat-v.lexvec', 'eat-v.subjmat'] ['eat-v.zerovec', 'eat-v.identmat']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="I" lemma="I" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <rule type="fa" cat="(S[dcl]\NP)/PP">
+     <lf start="1" span="1" word="sing" lemma="sing" pos="VBP" chunk="I-VP" entity="O" cat="((S[dcl]\NP)/PP)/NP" />
+     <rule type="lex" cat="NP">
+      <lf start="2" span="1" word="songs" lemma="song" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+     </rule>
+    </rule>
+    <rule type="fa" cat="PP">
+     <lf start="3" span="1" word="to" lemma="to" pos="TO" chunk="I-PP" entity="O" cat="PP/NP" />
+     <lf start="4" span="1" word="you" lemma="you" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+    </rule>
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+I I PRP NP ['I-n.onevec'] ['I-n.onevec']
+sing sing VBP ((S[dcl]\NP)/PP)/NP ['sing-v.lexvec', 'sing-v.subjmat', 'sing-v.objmat'] ['sing-v.zerovec', 'sing-v.identmat', 'sing-v.identmat']
+to to TO PP/NP ['to-p.lexvec', 'to-p.zeromat', 'to-p.lexmat'] ['to-p.zerovec', 'to-p.zeromat', 'to-p.identmat']
+you you PRP NP ['you-n.onevec'] ['you-n.onevec']
+songs song NNS N ['song-n.lexvec'] ['song-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="I" lemma="I" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="like" lemma="like" pos="VBP" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[to]\NP)" />
+    <rule type="fa" cat="S[to]\NP">
+     <lf start="2" span="1" word="to" lemma="to" pos="TO" chunk="I-VP" entity="O" cat="(S[to]\NP)/(S[b]\NP)" />
+     <rule type="fa" cat="S[b]\NP">
+      <rule type="fa" cat="(S[b]\NP)/PP">
+       <lf start="3" span="1" word="sing" lemma="sing" pos="VB" chunk="I-VP" entity="O" cat="((S[b]\NP)/PP)/NP" />
+       <rule type="lex" cat="NP">
+        <lf start="4" span="1" word="songs" lemma="song" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+       </rule>
+      </rule>
+      <rule type="fa" cat="PP">
+       <lf start="5" span="1" word="to" lemma="to" pos="TO" chunk="I-PP" entity="O" cat="PP/NP" />
+       <lf start="6" span="1" word="you" lemma="you" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+      </rule>
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="7" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+I I PRP NP ['I-n.onevec'] ['I-n.onevec']
+like like VBP (S[dcl]\NP)/(S[to]\NP) ['like-v.empty'] ['like-v.empty']
+to to TO (S[to]\NP)/(S[b]\NP) ['to-o.empty'] ['to-o.empty']
+sing sing VB ((S[b]\NP)/PP)/NP ['sing-v.lexvec', 'sing-v.subjmat', 'sing-v.objmat'] ['sing-v.zerovec', 'sing-v.identmat', 'sing-v.identmat']
+to to TO PP/NP ['to-p.lexvec', 'to-p.zeromat', 'to-p.lexmat'] ['to-p.zerovec', 'to-p.zeromat', 'to-p.identmat']
+you you PRP NP ['you-n.onevec'] ['you-n.onevec']
+songs song NNS N ['song-n.lexvec'] ['song-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="I" lemma="I" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="would" lemma="would" pos="MD" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[b]\NP)" />
+    <rule type="fa" cat="S[b]\NP">
+     <lf start="2" span="1" word="like" lemma="like" pos="VB" chunk="I-VP" entity="O" cat="(S[b]\NP)/(S[to]\NP)" />
+     <rule type="fa" cat="S[to]\NP">
+      <lf start="3" span="1" word="to" lemma="to" pos="TO" chunk="I-VP" entity="O" cat="(S[to]\NP)/(S[b]\NP)" />
+      <lf start="4" span="1" word="dance" lemma="dance" pos="VB" chunk="I-VP" entity="O" cat="S[b]\NP" />
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+I I PRP NP ['I-n.onevec'] ['I-n.onevec']
+would would MD (S[dcl]\NP)/(S[b]\NP) ['would-o.empty'] ['would-o.empty']
+like like VB (S[b]\NP)/(S[to]\NP) ['like-v.empty'] ['like-v.empty']
+to to TO (S[to]\NP)/(S[b]\NP) ['to-o.empty'] ['to-o.empty']
+dance dance VB S[b]\NP ['dance-v.lexvec', 'dance-v.subjmat'] ['dance-v.zerovec', 'dance-v.identmat']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="I" lemma="I" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="like" lemma="like" pos="VBP" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[ng]\NP)" />
+    <lf start="2" span="1" word="dancing" lemma="dance" pos="VBG" chunk="I-VP" entity="O" cat="S[ng]\NP" />
+   </rule>
+  </rule>
+  <lf start="3" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+I I PRP NP ['I-n.onevec'] ['I-n.onevec']
+like like VBP (S[dcl]\NP)/(S[ng]\NP) ['like-v.empty'] ['like-v.empty']
+dancing dance VBG S[ng]\NP ['dance-v.lexvec', 'dance-v.subjmat'] ['dance-v.zerovec', 'dance-v.identmat']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <rule type="fa" cat="NP[nb]">
+    <lf start="0" span="1" word="The" lemma="the" pos="DT" chunk="I-NP" entity="O" cat="NP[nb]/N" />
+    <rule type="fa" cat="N">
+     <lf start="1" span="1" word="happy" lemma="happy" pos="JJ" chunk="I-NP" entity="O" cat="N/N" />
+     <lf start="2" span="1" word="boy" lemma="boy" pos="NN" chunk="I-NP" entity="O" cat="N" />
+    </rule>
+   </rule>
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="3" span="1" word="has" lemma="have" pos="VBZ" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[pt]\NP)" />
+    <lf start="4" span="1" word="eaten" lemma="eat" pos="VBN" chunk="I-VP" entity="O" cat="S[pt]\NP" />
+   </rule>
+  </rule>
+  <lf start="5" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+The the DT NP[nb]/N ['the-d.lexvec', 'the-d.lexmat'] ['the-d.zerovec', 'the-d.identmat']
+has have VBZ (S[dcl]\NP)/(S[pt]\NP) ['have-v.empty'] ['have-v.empty']
+eaten eat VBN S[pt]\NP ['eat-v.lexvec', 'eat-v.subjmat'] ['eat-v.zerovec', 'eat-v.identmat']
+happy happy JJ N/N ['happy-j.lexvec', 'happy-j.lexmat'] ['happy-j.zerovec', 'happy-j.identmat']
+boy boy NN N ['boy-n.lexvec'] ['boy-n.onevec']
+<ccg>
+ <rule type="rp" cat="S[dcl]">
+  <rule type="ba" cat="S[dcl]">
+   <lf start="0" span="1" word="He" lemma="he" pos="PRP" chunk="I-NP" entity="O" cat="NP" />
+   <rule type="fa" cat="S[dcl]\NP">
+    <lf start="1" span="1" word="was" lemma="be" pos="VBD" chunk="I-VP" entity="O" cat="(S[dcl]\NP)/(S[adj]\NP)" />
+    <rule type="fa" cat="S[adj]\NP">
+     <lf start="2" span="1" word="happy" lemma="happy" pos="JJ" chunk="I-ADJP" entity="O" cat="(S[adj]\NP)/PP" />
+     <rule type="fa" cat="PP">
+      <lf start="3" span="1" word="with" lemma="with" pos="IN" chunk="I-PP" entity="O" cat="PP/NP" />
+      <rule type="fa" cat="NP[nb]">
+       <lf start="4" span="1" word="the" lemma="the" pos="DT" chunk="I-NP" entity="O" cat="NP[nb]/N" />
+       <lf start="5" span="1" word="results" lemma="result" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+      </rule>
+     </rule>
+    </rule>
+   </rule>
+  </rule>
+  <lf start="6" span="1" word="." lemma="." pos="." chunk="O" entity="O" cat="." />
+ </rule>
+</ccg>
+. . . . ['.-o.empty'] ['.-o.empty']
+He he PRP NP ['he-n.onevec'] ['he-n.onevec']
+was be VBD (S[dcl]\NP)/(S[adj]\NP) ['be-v.empty'] ['be-v.empty']
+happy happy JJ (S[adj]\NP)/PP ['happy-j.lexvec', 'happy-j.lexmat'] ['happy-j.zerovec', 'happy-j.identmat']
+with with IN PP/NP ['with-p.lexvec', 'with-p.zeromat', 'with-p.lexmat'] ['with-p.zerovec', 'with-p.zeromat', 'with-p.identmat']
+the the DT NP[nb]/N ['the-d.lexvec', 'the-d.lexmat'] ['the-d.zerovec', 'the-d.identmat']
+results result NNS N ['result-n.lexvec'] ['result-n.onevec']
