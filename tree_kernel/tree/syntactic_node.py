@@ -79,7 +79,7 @@ class SyntacticNode(Node):
         Returns:
         the i-th child
         """
-        if self._is_terminal():
+        if self.is_terminal():
             new_node = SyntacticNode(self._label, pos=self._pos, word=self._word)
             if self._lemma is not None:
                 new_node._lemma = self._lemma

@@ -121,8 +121,7 @@ def _lemma_tree_2_lemmapos_tree(syntactic_node, excluded_poss):
             new_node.word = syntactic_node.word.lower() + "-" + simple_pos
     else:
         for child in syntactic_node._children:
-            new_child = _lemma_tree_2_lemmapos_tree(child, syntactic_node,
-                                                    excluded_poss)
+            new_child = _lemma_tree_2_lemmapos_tree(child, excluded_poss)
             new_node.add_child(new_child)
             
     return new_node

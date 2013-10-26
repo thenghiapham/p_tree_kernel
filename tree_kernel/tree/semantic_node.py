@@ -65,8 +65,8 @@ class SemanticNode(SyntacticNode):
                 
         else:
             semantic_node = SemanticNode(label,vector)
-	for child in syntactic_node._children:
-		semantic_node.add_child(SemanticNode.create_semantic_node(child,None))
+            for child in syntactic_node._children:
+                semantic_node.add_child(SemanticNode.create_semantic_node(child,None))
         return semantic_node
         
     
