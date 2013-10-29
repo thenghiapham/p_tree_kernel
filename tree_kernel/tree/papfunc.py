@@ -61,15 +61,19 @@ class Papfunc_SemanticNode(SemanticNode):
   else:
         papfunc_node = Papfunc_SemanticNode(label,None)
         if semantic_node._children and not semantic_node.is_terminal():
-         print(semantic_node)
+         #print(semantic_node)
          for child in semantic_node._children:
-          print(child)
+          #print(child)
           assert_type(child, SemanticNode, "argument needs to be of type SemanticNode")
           papfunc_child=Papfunc_SemanticNode.create_papfunc_node(child, vecspace, matspace,multiply_matrices=multiply_matrices)
-          print(papfunc_child)
+          #print(papfunc_child)
           papfunc_node.add_child(papfunc_child)
   papfunc_node.compute_matreps(vecspace,matspace,multiply_matrices=multiply_matrices)
-  papfunc_node.set_vector(papfunc_node._numrep[0].transpose())
+  if len(papfunc_node._numrep)>0:
+   papfunc_node.set_vector(papfunc_node._numrep[0].transpose())
+  #else:
+   #print("Node %s has no vector as it has an empty numeric representation. Symbolic representation:" %papfunc_node)
+   #print(papfunc_node.get_matrep())
   return papfunc_node
 
  def add_child(self, child):
@@ -80,7 +84,7 @@ class Papfunc_SemanticNode(SemanticNode):
         Args:
         child: the child Papfunc_SemanticNode
         """
-	print ("adding child %s..." %child)
+	#print ("adding child %s..." %child)
         assert_type(child, Papfunc_SemanticNode)
         SemanticNode.add_child(self, child)
 
@@ -476,14 +480,16 @@ class Papfunc_SemanticNode(SemanticNode):
 #apply composition for binary branching nodes
 	if len(self._children) == 2 and self._matrep == []:
  		matrep1=self.get_child(0)._matrep
+                if not matrep1: raise ValueError("Empty matrix representation for node %s!" %self.get_child(0))
  		matrep2=self.get_child(1)._matrep
- 		arity1=len(matrep1)-1
+ 		if not matrep2: raise ValueError("Empty matrix representation for node %s!" %self.get_child(1))
+                arity1=len(matrep1)-1
  		arity2=len(matrep2)-1
 # first, compute symbolic matrix representation
  		if arity1-arity2 == 0:
- 			for x in range(0, arity1 +1):
+ 			for x in range(0, arity1+1):
  				self._matrep.append('(' + matrep1[x] + '+' + matrep2[x] + ')')
- 		if arity1 < arity2 and not re.search('empty$',matrep2[0]):
+ 		if arity1 < arity2 and not re.search('empty$',matrep2[0]) and not re.search('empty$',matrep1[0]):
  			for x in range(0, arity2):
  				if x == 0:
  					self._matrep.append('(' + matrep2[x] + '+' + matrep2[arity2] + '*' + matrep1[x] + ')')
@@ -491,7 +497,7 @@ class Papfunc_SemanticNode(SemanticNode):
  					self._matrep.append('(' + matrep2[x] + '*' + matrep1[x] + ')')
  				else:
  					self._matrep.append(matrep2[x])
- 		if arity1 > arity2 and not re.search('empty$',matrep1[0]):
+ 		if arity1 > arity2 and not re.search('empty$',matrep2[0]) and not re.search('empty$',matrep1[0]):
  			for x in range(0, arity1):
  				if x == 0:
  					self._matrep.append('(' + matrep1[x] + '+' + matrep1[arity1] + '*' + matrep2[x] + ')')
@@ -504,10 +510,10 @@ class Papfunc_SemanticNode(SemanticNode):
  # computing numeric matrix representation of a node from those of its two daughters	
 		numrep1=self.get_child(0)._numrep
  		numrep2=self.get_child(1)._numrep
- 		if arity1-arity2 == 0:
-                         for x in range(0, arity1 +1):
+ 		if arity1-arity2 == 0 and numrep1 and numrep2:
+                        for x in range(0, arity1+1):
                                  self._numrep.append(numrep1[x].__add__(numrep2[x]))
- 		if arity1 < arity2 and not numrep1==[]:
+ 		if arity1 < arity2 and not numrep1==[] and not numrep2==[]:
                          for x in range(0, arity2):
                                  if x == 0:
                                          self._numrep.append(numrep2[x].__add__(numrep2[arity2] * numrep1[x]))
@@ -516,7 +522,7 @@ class Papfunc_SemanticNode(SemanticNode):
                                   else: self._numrep.append(numrep1[x].__add__(numrep2[x]))
                                  else:
                                          self._numrep.append(numrep2[x])
- 		if arity1 > arity2 and not numrep2==[]:
+ 		if arity1 > arity2 and not numrep1==[] and not numrep2==[]:
                          for x in range(0, arity1):
                                  if x == 0:
                                          self._numrep.append(numrep1[x].__add__(numrep1[arity1]*numrep2[x]))

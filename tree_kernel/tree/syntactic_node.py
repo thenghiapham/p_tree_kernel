@@ -179,7 +179,7 @@ class SyntacticNode(Node):
         label = label.replace("(","<")
         label = label.replace(")",">")
         if self._type == SyntacticNode.TERMINAL:
-            word = self._word
+            word = self._word.encode('ascii', 'ignore')
             if word == "(":
                 word = "LRB"
             elif word == ")":
