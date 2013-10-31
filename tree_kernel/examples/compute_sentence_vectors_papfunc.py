@@ -7,9 +7,17 @@ from tree.semantic_node import SemanticNode
 from tree.syntactic_tree import SyntacticTree
 from composes.semantic_space.space import Space
 
+#this scripts takes 4 arguments: 
+#*input xml file
+#*output file
+#*vector space prefix (for dm format)
+#*matrix spce prefix (for dm format)
+
+if len(sys.argv)!=5: raise TypeError("The script takes exactly 4 arguments, %i given" %len(sys.argv))
+
 print("importing vectors...")
-vecfilepref = "/mnt/cimec-storage-sata/users/denis.paperno/composition_grammar/papfunc_spaces/vectors_ppmi_svd_300_simplistic_training"
-matfilepref = "/mnt/cimec-storage-sata/users/denis.paperno/composition_grammar/papfunc_spaces/matrices_ppmi_svd_300_simplistic_training"
+vecfilepref = sys.argv[3]# e.g. "/mnt/cimec-storage-sata/users/denis.paperno/composition_grammar/papfunc_spaces/vectors_ppmi_svd_300_simplistic_training_nouns_only"
+matfilepref = sys.argv[4]# e.g. "/mnt/cimec-storage-sata/users/denis.paperno/composition_grammar/papfunc_spaces/matrices_ppmi_svd_300_simplistic_training"
 vecspace = Space.build(data = vecfilepref + ".dm",
                        rows = vecfilepref + ".rows",
                        format = "dm")
@@ -21,6 +29,7 @@ matspace = Space.build(data = matfilepref + ".dm",
 
 infile = sys.argv[1]
 outfile= open(sys.argv[2],'w')
+matfile=open(sys.argv[2]+".matreps",'w')
 
 sent=0
 succ=0
@@ -55,6 +64,7 @@ with open(infile) as data:
        dim=str(papnode.get_vector().mat.A[0].tolist()[x])
        if x>0: print('\t',end='',file=outfile)
        print(dim,end='',file=outfile)
+      print(papnode.get_matrep(),file=matfile)
       print("",file=outfile)
       vecs +=1
     except AttributeError: print ("Papnode %s doesn't have a vector representation" %papnode)
@@ -72,3 +82,4 @@ print("%i sentences successfully parsed" %succ)
 print("%i vectors produced" %vecs)
 data.close()
 outfile.close()
+matfile.close()
