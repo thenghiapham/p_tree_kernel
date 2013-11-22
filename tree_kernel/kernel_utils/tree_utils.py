@@ -53,7 +53,7 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
         the semantic node
     """
     
-    new_node = SemanticNode.create_semantic_node(syntactic_node, None)
+    
     
     # if the node is a terminal node:
     #   - retrieve the lexical vector
@@ -64,6 +64,7 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
     #     the vector of the current node
     # 
     if syntactic_node.is_terminal():
+        new_node = SemanticNode.create_semantic_node(syntactic_node, None)
         try:
             row_vector = vector_space.get_row(syntactic_node._word)
             if normed:
@@ -83,6 +84,7 @@ def _syntactic_node_2_semantic_node(syntactic_node, vector_space,
                 new_node._vector =  matrix_type(np.zeros(vector_shape,
                                                          dtype=np.float))
     else:
+        new_node = SemanticNode(syntactic_node.label, None)
         for child in syntactic_node._children:
             new_child = _syntactic_node_2_semantic_node(child, vector_space,
                                                         composition_model, normed)
