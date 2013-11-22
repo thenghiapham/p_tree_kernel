@@ -516,7 +516,7 @@ class Papfunc_SemanticNode(SemanticNode):
             if arity1 < arity2 and not numrep1==[] and not numrep2==[]:
                 for x in range(0, arity2):
                     if x == 0:
-                        self._numrep.append(numrep2[x].__add__(numrep2[arity2] * padd_matrix(numrep1[x]),0))
+                        self._numrep.append(numrep2[x].__add__(numrep2[arity2] * padd_matrix(numrep1[x],0)))
                     elif x < len(numrep1):
                         if multiply_matrices:
                             self._numrep.append(numrep2[x] * numrep1[x])
