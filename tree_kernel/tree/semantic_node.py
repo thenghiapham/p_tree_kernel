@@ -87,7 +87,7 @@ class SemanticNode(SyntacticNode):
         if self._vector is not None:
             return self._vector
         else:
-            raise AttributeError("Node does not have word form attribute")
+            raise AttributeError("Node does not have vector attribute")
     def set_vector(self, vector):
         self._vector = vector
     vector = property(get_vector, set_vector)
