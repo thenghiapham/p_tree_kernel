@@ -7,7 +7,9 @@ from tree.semantic_node import SemanticNode
  
 class Papfunc_SemanticNode(SemanticNode):
     '''
-    An instance of this class is a semantic tree that has with matrix representations (symbolic and numeric) computed in the papernization composition paradigm.
+    An instance of this class is a semantic tree that has with matrix
+    representations (symbolic and numeric) computed in the papernization
+    composition paradigm.
     '''
     def __init__(self, label, vector, *args, **kwargs):
         super(SemanticNode, self).__init__(label, *args, **kwargs)
@@ -170,7 +172,6 @@ class Papfunc_SemanticNode(SemanticNode):
     #
     # - generate 0, 1 and identity matrices/vectors instead of getting
     #   them from semantic space
- 
         if not self.is_terminal():
             raise ValueError("insert_terminal_node_representation called on non-terminal node")
   
@@ -182,7 +183,8 @@ class Papfunc_SemanticNode(SemanticNode):
             lexitem=self.lemma
         else:
             lexitem=self.word
-        if lexitem=="an" or lexitem =="An": lexitem="a"
+        if lexitem=="an" or lexitem =="An":
+            lexitem="a"
  
  
         # retrieving the zero, one and identity matrix/vectors (might be a
@@ -224,6 +226,7 @@ class Papfunc_SemanticNode(SemanticNode):
         if shortpos=="n":
         # if the noun is in lexicon, return its vector, if not return the
         # 1-vector
+            
             if lempos in vecspace.row2id:
                 stringstructure.append(lempos + '.lexvec')
                 numericalstructure.append(vecspace.get_row(lempos))
@@ -445,7 +448,8 @@ class Papfunc_SemanticNode(SemanticNode):
  
     def compute_matreps(self,vecspace,matspace,multiply_matrices=False):
         '''
-        This method computes symbolic and numeric matrix representations od a papfunc node, taking as input a vector space, a matrix space. An optional Boolean argument, if set to True, makes matrices to be multiplied rather than summed when both subconstituents have arity greater than 0.
+        This method computes symbolic and numeric matrix representations od a 
+        papfunc node, taking as input a vector space, a matrix space. An optional Boolean argument, if set to True, makes matrices to be multiplied rather than summed when both subconstituents have arity greater than 0.
         '''
         # for terminal nodes call insert_terminal_node_representation
         if self.is_terminal():
@@ -461,7 +465,7 @@ class Papfunc_SemanticNode(SemanticNode):
                         y = DenseMatrix(temp_numrep[x])
                         y.reshape((dimensionality,(y.shape[1]/dimensionality)))
                         numrep.append(y)
-                        self._numrep = numrep
+            self._numrep = numrep
         #raise an exception for a non-terminal node without children
         elif len(self._children) == 0:
             raise ValueError("Non-terminal non-branching node!")
