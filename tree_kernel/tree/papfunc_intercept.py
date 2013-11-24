@@ -173,7 +173,6 @@ class Papfunc_SemanticNode(SemanticNode):
     #
     # - generate 0, 1 and identity matrices/vectors instead of getting
     #   them from semantic space
- 
         if not self.is_terminal():
             raise ValueError("insert_terminal_node_representation called on non-terminal node")
   
@@ -185,7 +184,8 @@ class Papfunc_SemanticNode(SemanticNode):
             lexitem=self.lemma
         else:
             lexitem=self.word
-        if lexitem=="an" or lexitem =="An": lexitem="a"
+        if lexitem=="an" or lexitem =="An":
+            lexitem="a"
  
  
         # retrieving the zero, one and identity matrix/vectors (might be a
@@ -227,6 +227,7 @@ class Papfunc_SemanticNode(SemanticNode):
         if shortpos=="n":
         # if the noun is in lexicon, return its vector, if not return the
         # 1-vector
+            
             if lempos in vecspace.row2id:
                 stringstructure.append(lempos + '.lexvec')
                 numericalstructure.append(vecspace.get_row(lempos))
@@ -465,7 +466,7 @@ class Papfunc_SemanticNode(SemanticNode):
                         y = DenseMatrix(temp_numrep[x])
                         y.reshape((dimensionality,(y.shape[1]/dimensionality)))
                         numrep.append(y)
-                        self._numrep = numrep
+            self._numrep = numrep
         #raise an exception for a non-terminal node without children
         elif len(self._children) == 0:
             raise ValueError("Non-terminal non-branching node!")
@@ -527,7 +528,7 @@ class Papfunc_SemanticNode(SemanticNode):
             if arity1 > arity2 and not numrep1==[] and not numrep2==[]:
                 for x in range(0, arity1):
                     if x == 0:
-                        self._numrep.append(numrep1[x].__add__(numrep1[arity1]*padd_matrix(numrep2[x],0)))
+                        self._numrep.append(numrep1[x].__add__(numrep1[arity1] * padd_matrix(numrep2[x],0)))
                     elif x < len(numrep2):
                         if multiply_matrices:
                             self._numrep.append(numrep2[x] * numrep1[x])
