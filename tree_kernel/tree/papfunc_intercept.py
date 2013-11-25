@@ -493,7 +493,8 @@ class Papfunc_SemanticNode(SemanticNode):
                     if x == 0:
                         self._matrep.append('(' + matrep2[x] + '+' + matrep2[arity2] + '*' + matrep1[x] + ')')
                     elif x < len(matrep1):
-                        self._matrep.append('(' + matrep2[x] + '*' + matrep1[x] + ')')
+                        if multiply_matrices: self._matrep.append('(' + matrep2[x] + '*' + matrep1[x] + ')')
+                        else: self._matrep.append('(' + matrep2[x] + '+' + matrep1[x] + ')')
                     else:
                         self._matrep.append(matrep2[x])
             if arity1 > arity2 and not re.search('empty$',matrep2[0]) and not re.search('empty$',matrep1[0]):
@@ -501,7 +502,8 @@ class Papfunc_SemanticNode(SemanticNode):
                     if x == 0:
                         self._matrep.append('(' + matrep1[x] + '+' + matrep1[arity1] + '*' + matrep2[x] + ')')
                     elif x < len(matrep2):
-                        self._matrep.append('(' + matrep1[x] + '*' + matrep2[x] + ')')
+                        if multiply_matrices: self._matrep.append('(' + matrep1[x] + '*' + matrep2[x] + ')')
+                        else: self._matrep.append('(' + matrep1[x] + '+' + matrep2[x] + ')')
                     else:
                         self._matrep.append(matrep1[x])
             if re.search('empty$',matrep1[0]):
