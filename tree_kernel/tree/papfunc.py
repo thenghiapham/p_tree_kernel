@@ -303,19 +303,24 @@ class Papfunc_SemanticNode(SemanticNode):
                 stringstructure.append(lempos + '.zeromat')
                 numericalstructure.append(zeromat)
    
-            # "to be" (at least) can take a prepositional phrase as direct
-            # object (to be in the park): since the preposition ins this case is
-            # indistinguishable from the one that modifies VPs or adjectives, we
-            # treat "to be" when it has category (S[dcl]\NP)/PP as a zero vector
-            # and an identity matrix: this will result in the combination of "to
-            # be" and the PP being the PP vector and the identity matrix
-            # (identity matrix from to be plust zero matrix from PP), the
-            # identity matrix will then be multiplied by the subject vector,
-            # resulting in the sentence being represented by the sum of the
-            # subject and PP vectors
-            elif re.match("^\(S[^\\\\/]*\\\\NP\)/PP$",label): 
-                stringstructure=[lempos + '.zerovec',lempos + '.identmat']
-                numericalstructure=[zerovec,identmat]
+            # sometimes intransitive verbs take a preposition as
+            # complement: either the "to be in the park" case, or the
+            # "sing with friends" case: in these cases, we will add an
+            # identity matrix as the outermost matrix, to take the PP
+            # and just add it to the verb vector
+            elif re.match("^\(S[^\\\\/]*\\\\NP\)/PP$",label):
+                if lempos + '.subjmat' in matspace.row2id:
+                    stringstructure.append(lempos + '.subjmat')
+                    numericalstructure.append(matspace.get_row(lempos+'.subjmat'))
+                else:
+                    stringstructure.append(lempos + '.identmat')
+                    numericalstructure.append(identmat)
+
+                # in any case, the outermost matrix is going to be
+                # composed with the prepositional phrase, so we want
+                # it to be identity
+                stringstructure.append(lempos + '.identmat')
+                numericalstructure.append(identmat)
  
             # finally, auxiliary and the like (including some pro constructions
             # that probably shouldn't be treated this way), if I'm right, are
