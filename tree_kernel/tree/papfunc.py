@@ -268,9 +268,10 @@ class Papfunc_SemanticNode(SemanticNode):
    
             # if verb is regular transitive, or tri-argumental with
             # prepositional third argument (that we treat as a normal
-            # verb-modifying PP) add, one after the other, subject and object
-            # matrix
-            elif re.match("^\(S[^\\\\/]*\\\\NP\)/NP$",label) or  re.match("^\(\(S[^\\\\/]*\\\\NP\)/PP\)/NP",label):
+            # verb-modifying PP) or a "control structure" followed by
+            # to ("a woman uses a sword to chop heads") we add, one after
+            # the other, subject and object matrix
+            elif re.match("^\(S[^\\\\/]*\\\\NP\)/NP$",label) or  re.match("^\(\(S[^\\\\/]*\\\\NP\)/PP\)/NP",label) or  re.match(".*S.*NP.*to.*NP.*NP$",label):
                 if lempos + '.subjmat' in matspace.row2id:
                     stringstructure.append(lempos + '.subjmat')
                     numericalstructure.append(matspace.get_row(lempos+'.subjmat'))
@@ -284,8 +285,10 @@ class Papfunc_SemanticNode(SemanticNode):
                     stringstructure.append(lempos + '.identmat')
                     numericalstructure.append(identmat)
  
-            # ditransitive constructions: we insert subj and obj as usual, and
-            # use zero (!!!) for the nearest argument (outermost matrix)
+            # ditransitive constructions: we insert subj and obj as
+            # usual, and use zero (!!!) for the nearest argument
+            # (outermost matrix) (note that we are pre-emepting this
+            # from applying to the "use control" constructions above
             elif re.match(".*S.*NP.*NP.*NP$",label):
                 if lempos + '.subjmat' in matspace.row2id:
                     stringstructure.append(lempos + '.subjmat')
