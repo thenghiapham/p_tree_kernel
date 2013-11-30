@@ -81,7 +81,7 @@ class SyntacticNode(Node):
         """
         if self.is_terminal():
             new_node = SyntacticNode(self._label, pos=self._pos, word=self._word)
-            if self._lemma is not None:
+            if hasattr(self, '_lemma'):
                 new_node._lemma = self._lemma
         else:
             new_node = SyntacticNode(self._label)
@@ -219,14 +219,14 @@ class SyntacticNode(Node):
     children = property(get_children)
     
     def get_lemma(self):
-        if self._lemma is not None:
+        if hasattr(self, '_lemma'):
             return self._lemma
         else:
             raise AttributeError("Node does not have lemma attribute")
     lemma = property(get_lemma)
         
     def get_word(self):
-        if self._word is not None:
+        if hasattr(self, '_word'):
             return self._word
         else:
             raise AttributeError("Node does not have word form attribute")
