@@ -325,13 +325,23 @@ class Papfunc_SemanticNode(SemanticNode):
                 stringstructure.append(lempos + '.identmat')
                 numericalstructure.append(identmat)
  
-            # finally, auxiliary and the like (including some pro constructions
-            # that probably shouldn't be treated this way), if I'm right, are
-            # always treated as VP modifiers, and we'll convert them to empty
-            # elements
+            # finally, auxiliary and the like (including some pro
+            # constructions that probably shouldn't be treated this
+            # way), if I'm right, are always treated as VP
+            # modifiers. Some adverbs are also treated as predicative
+            # adjectives, and so we must do something for those cases
+            # as well ("run around" is parsed as one of these VP
+            # modifiers structures (run) followed by a predicative
+            # adjective). This requires some further thinking, but for
+            # the time being we will insert the subject matrix if
+            # possible, zero matrix otherwise
             elif re.match("^\(*S[^\\\\/]*\\\\NP\)/\(S[^\\\\/]*\\\\NP\)$",label):
-                stringstructure=[lempos + '.empty']
-                numericalstructure=["empty"]
+                if lempos + '.subjmat' in matspace.row2id:
+                    stringstructure.append(lempos + '.subjmat')
+                    numericalstructure.append(matspace.get_row(lempos+'.subjmat'))
+                else:
+                    stringstructure.append(lempos + '.zeromat')
+                    numericalstructure.append(zeromat)
  
             return (stringstructure,numericalstructure)
             # end of verb processing
