@@ -38,7 +38,7 @@ class CollapsedCompositionalTreeKernel(SyntacticTreeKernel):
             if node1._label != node2._label:
                 delta_matrix[node2id1[node1],node2id2[node2]] = 0
             else:
-                delta_matrix[node2id1[node1],node2id2[node2]] = ((self._lambda ** (max(node1.get_height(),node2.get_height()) - 1)) * 
+                delta_matrix[node2id1[node1],node2id2[node2]] = ((self._lambda ** (max(node1.get_height(),node2.get_height()))) * 
                                                                  self._measure.get_sim(node1._vector, node2._vector))
         else:
             product_children_delta = self._lambda 
@@ -58,7 +58,7 @@ class CollapsedCompositionalTreeKernel(SyntacticTreeKernel):
                 sim_children_product *= self._measure.get_sim(child1._vector, child2._vector)
                 
             final_delta = (product_children_delta + 
-                           ((self._lambda ** (max(node1.get_height(),node2.get_height()) - 1)) * 
+                           ((self._lambda ** (max(node1.get_height(),node2.get_height()))) * 
                             (self._measure.get_sim(node1._vector, node2._vector) - 
                              sim_children_product)))
              
