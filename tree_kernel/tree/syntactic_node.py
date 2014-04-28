@@ -202,7 +202,7 @@ class SyntacticNode(Node):
                 word = "LRB"
             elif word == ")":
                 word = "RRB"
-            return "(%s (%s %s))" %(label, self._pos, word)
+            return "(%s %s)" %(label, word)
         else:
             if not self._children:
                 return label

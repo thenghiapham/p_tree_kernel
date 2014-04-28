@@ -1,4 +1,4 @@
-from tree.papfunc import Papfunc_SemanticNode
+from tree.papfunc_old import Papfunc_SemanticNode
 from tree.semantic_node import SemanticNode
 from tree.syntactic_tree import SyntacticTree
 from composes.semantic_space.space import Space
@@ -8,8 +8,8 @@ xml_string = '''
 </ccg>
 '''
 syntactic_tree = SyntacticTree.parse_tree_from_xml_string(xml_string)
-vecfilepref = "/mnt/data/marco.baroni/composes/scripts/cctools/vectors"
-matfilepref = "/mnt/data/marco.baroni/composes/scripts/cctools/matrices"
+vecfilepref = "/home/pham/work/project/lf/test_md/vectors"
+matfilepref = "/home/pham/work/project/lf/test_md/matrices"
 vecspace = Space.build(data = vecfilepref + ".dm",
                        rows = vecfilepref + ".rows",
                        format = "dm")
@@ -32,7 +32,9 @@ semnode = SemanticNode.create_semantic_node(syntactic_tree.root,None)
 #testnode=Papfunc_SemanticNode("magic",None)
 #print testnode
 
+print semnode.is_terminal()
 papnode = Papfunc_SemanticNode.create_papfunc_node(semnode,vecspace,matspace)
+
 
 print papnode._matrep
 for x in papnode._numrep: print x
