@@ -50,7 +50,9 @@ class SyntacticTree(object):
         if element.tag == "ccg":
             if len(element) == 0:
                 print "empty tree"
-                return SyntacticTree(SyntacticNode("S"))
+                return SyntacticTree(SyntacticNode("S",lemma="empty_tree",
+                                                   word="empty_tree",
+                                                   pos="empty_tree"))
             return SyntacticTree(cls._element_2_syntactic_node(element[0]))
         else:
             raise ValueError("element parameter must be a <ccg> element")
@@ -131,7 +133,7 @@ class SyntacticTree(object):
             raise ValueError("a forest cannot be empty")
             #return []
         elif string[0] != "(":
-            raise ValueError("a forest string must starts with (")
+            raise ValueError("a forest string must starts with (: %s" %string)
         
         left_bracket_minus_right_bracket = 0
         left_bracket = 0
@@ -189,6 +191,9 @@ class SyntacticTree(object):
         a string
         """
         return str(self._root)
+    
+    def print_tree(self, info_type=SyntacticNode.LEMMA):
+        return self.root.print_node(info_type)
     
     def get_nodes(self):
         """Get the list every node in a tree in breath-first order

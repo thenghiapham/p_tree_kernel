@@ -27,6 +27,10 @@ class SyntacticNode(Node):
     # constants to indicate the type of a node
     TERMINAL = 0
     NON_TERMINAL = 1
+    
+    LEMMA=0
+    LEMMA_POS=1
+    WORD=2
 
     def __init__(self, label, *args, **kwargs):
         '''
@@ -54,6 +58,20 @@ class SyntacticNode(Node):
                 self._word = kwargs["word"]
         else:
             self._type = SyntacticNode.NON_TERMINAL
+    
+    @staticmethod        
+    def _get_short_pos(pos, lemma, label):
+        pos = pos[0].lower()
+        # NOTE NOTE NOTE: where is "j"
+        #if not (pos == "n" or pos == "j" or pos == "v"):
+        if not (pos == "n" or pos == "j" or pos == "v" or pos == "r"):
+            if pos == "c":
+                pos = "d"
+            elif pos == "d":
+                pos = "d"
+            else:
+                pos = "o"
+        return pos
         
     
     def add_child(self, child):
@@ -193,6 +211,43 @@ class SyntacticNode(Node):
                 for child in self._children:
                     child_string = child_string + " " + str(child)
                 return "(%s%s)" %(label, child_string)
+    
+    def print_node(self, info_type):
+        label = self._label
+        if label == "(":
+            label = "LRB"
+        elif label == ")":
+            label = "RRB"
+        label = label.replace("(","<")
+        label = label.replace(")",">")
+        if self._type == SyntacticNode.TERMINAL:
+            if info_type == SyntacticNode.LEMMA or info_type == SyntacticNode.LEMMA_POS:
+                lemma = self._lemma.encode('ascii', 'ignore')
+                if lemma == "(":
+                    lemma = "lrb"
+                elif lemma == ")":
+                    lemma = "rrb"
+                if info_type == SyntacticNode.LEMMA:
+                    return "(%s (%s %s))" %(label, self._pos, lemma)
+                else:
+                    return "(%s (%s %s))" %(label, self._pos, "%s-%s" %(lemma, 
+                                                                        SyntacticNode._get_short_pos(self._pos, lemma, label)))
+            else:
+                word = self._word.encode('ascii', 'ignore')
+                if word == "(":
+                    word = "LRB"
+                elif word == ")":
+                    word = "RRB"
+                return "(%s (%s %s))" %(label, self._pos, word)
+        else:
+            if not self._children:
+                return label
+            else:
+                child_string = ""
+                for child in self._children:
+                    child_string = child_string + " " + child.print_node(info_type)
+                return "(%s%s)" %(label, child_string)
+        
     
     def get_surface_string(self):
         if self.is_terminal():

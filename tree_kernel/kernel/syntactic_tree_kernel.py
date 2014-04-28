@@ -50,7 +50,7 @@ class SyntacticTreeKernel(TreeKernel):
         elif not node1.has_same_production(node2):
             delta_matrix[node2id1[node1],node2id2[node2]] = 0
         else:
-            product_children_delta = self._lambda 
+            product_children_delta = 1#self._lambda
             for i in xrange(len(node1._children)):
                 child1 = node1.get_child(i)
                 child2 = node2.get_child(i)
@@ -58,14 +58,14 @@ class SyntacticTreeKernel(TreeKernel):
                 if child_delta == -1:
                     raise ValueError("???")
                 else:
-                    product_children_delta *= (1 + child_delta)
+                    product_children_delta *= (1 + self._lambda * child_delta)
             delta_matrix[node2id1[node1],node2id2[node2]] = product_children_delta
                 
 def test():
     print "hello"
-    syntactic_tree1 = SyntacticTree.read_tree("VP (VBZ kill) (NP (N man))")
-    syntactic_tree2 = SyntacticTree.read_tree("VP (VBZ murder) (NP (N man))")
-    kernel = SyntacticTreeKernel(1.0)
+    syntactic_tree1 = SyntacticTree.read_tree("(VP (VBZ kill) (NP (N man)))")
+    syntactic_tree2 = SyntacticTree.read_tree("(VP (VBZ murder) (NP (N man)))")
+    kernel = SyntacticTreeKernel(0.4)
     print syntactic_tree1
     print syntactic_tree2
     print [node._label for node in syntactic_tree1.get_nodes()] 
