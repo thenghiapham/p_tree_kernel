@@ -8,18 +8,20 @@ from tree.semantic_node import SemanticNode
 class Papfunc_SemanticNode(SemanticNode):
     '''
     An instance of this class is a semantic tree that has with matrix
-    representations (symbolic and numeric) computed in the papernization
-    composition paradigm.
+    representations (symbolic and numeric) computed in the practical lexical
+    function composition paradigm.
     '''
     def __init__(self, label, vector, *args, **kwargs):
         super(SemanticNode, self).__init__(label, *args, **kwargs)
         if vector is not None:
             assert_type(vector, Matrix, "argument vector needs to be of type Matrix")
+        # set default attribuite values
         self._vector = vector
         self._matrep = []
         self._numrep = []
 
-
+    #method that returns the symbolic matrix representation 
+    #(a list of vector and matrix names in string format)
     def get_matrep(self):
         if self._matrep is not None:
             return self._matrep
@@ -29,6 +31,8 @@ class Papfunc_SemanticNode(SemanticNode):
         self._matrep = matrep
     matrep = property(get_matrep, set_matrep)
 
+    #method that returns the numeric matrix representation
+    #(a list of vectors and matrices)
     def get_numrep(self):
         if self._numrep is not None:
             return self._numrep
@@ -38,13 +42,13 @@ class Papfunc_SemanticNode(SemanticNode):
         self._numrep = numrep
     numrep = property(get_numrep, set_numrep)
 
-    @classmethod
+    @classmethod #create a node from a semantic node using composition
     def create_papfunc_node(cls, semantic_node, vecspace, matspace,multiply_matrices=False):
         '''
         Create a Papfunc semantic node from a semantic node, a vector space, and a space of (flattened) matrices. An optional Boolean argument, if set to True, makes matrices to be multiplied rather than summed when both subconstituents have arity greater than 0.
         '''
         label = semantic_node.label
-        if semantic_node.is_terminal():
+        if semantic_node.is_terminal():#for terminal nodes perform lexical lookup
             word = semantic_node.word
             pos = semantic_node.pos
             if hasattr(semantic_node, "_lemma"):
@@ -53,22 +57,18 @@ class Papfunc_SemanticNode(SemanticNode):
             else:
                 papfunc_node = Papfunc_SemanticNode(label,None, word=word, pos=pos)
                 
-        else:
+        else:# initialize a non-terminal node
             papfunc_node = Papfunc_SemanticNode(label,None)
             if semantic_node._children and not semantic_node.is_terminal():
-                #print(semantic_node)
+                #initialize and add each child
                 for child in semantic_node._children:
-                    #print(child)
                     assert_type(child, SemanticNode, "argument needs to be of type SemanticNode")
                     papfunc_child=Papfunc_SemanticNode.create_papfunc_node(child, vecspace, matspace,multiply_matrices=multiply_matrices)
-                    #print(papfunc_child)
                     papfunc_node.add_child(papfunc_child)
+        #compositionally obtain semantic representations
         papfunc_node.compute_matreps(vecspace,matspace,multiply_matrices=multiply_matrices)
         if len(papfunc_node._numrep)>0:
             papfunc_node.set_vector(papfunc_node._numrep[0].transpose())
-        #else:
-            #print("Node %s has no vector as it has an empty numeric representation. Symbolic representation:" %papfunc_node)
-            #print(papfunc_node.get_matrep())
         return papfunc_node
 
     def add_child(self, child):
@@ -79,7 +79,6 @@ class Papfunc_SemanticNode(SemanticNode):
         Args:
         child: the child Papfunc_SemanticNode
         """
-        #print ("adding child %s..." %child)
         assert_type(child, Papfunc_SemanticNode)
         SemanticNode.add_child(self, child)
 
@@ -107,7 +106,7 @@ class Papfunc_SemanticNode(SemanticNode):
  
     # Moreover, for verbs, the flattened matrices are expected to be
     # suffixed by the strings .subjmat and .objmat, respectively.
- 
+
     # When looking if a terminal node lexical item is in the relevant
     # space(s), by default, we work with lemmas, but there is an option to
     # use word forms instead (what we would really need, I suspect, is to
@@ -164,6 +163,7 @@ class Papfunc_SemanticNode(SemanticNode):
     # order.
  
     # TODOS:
+
     #
     # - decide if lemma or wordform on a POS-by-POS basis
     #
@@ -430,18 +430,26 @@ class Papfunc_SemanticNode(SemanticNode):
                 numericalstructure.append(zerovec)
  
             # if preposition is modifying a noun/np or sentence, we just need to
-            # insert its meaningful lexical matrix, or identity
+            # insert its meaningful lexical matrix, or identity. If the preposition
+            # also has a subject matrix in the matrix spce, we insert it along with 
+            # the lexical/object matrix.
             if re.match("^\(NP\\\\NP\)/NP$",label) or re.match("^\(S/S\)/NP$",label):
+                if (lempos + '.subjmat') in matspace.row2id:
+                    stringstructure.append(lempos + '.subjmat')
+                    numericalstructure.append(matspace.get_row(lempos + '.subjmat'))
                 if lempos in matspace.row2id:
                     stringstructure.append(lempos + '.lexmat')
                     numericalstructure.append(matspace.get_row(lempos))
+                elif (lempos + '.objmat') in matspace.row2id:
+                    stringstructure.append(lempos + '.objmat')
+                    numericalstructure.append(matspace.get_row(lempos + '.objmat'))
                 else:
                     stringstructure.append(lempos + '.identmat')
                     numericalstructure.append(identmat)
  
             # if instead preposition is modifying anything else (VP modifier, PP
             # argument of triargumental verb, adjective modifier, copula
-            # argument), we must first insert a 0 matrix (to be combined with
+            # argument), we must first insert a subject or 0 matrix (to be combined with
             # the verb/adj matrix by summing), and then the contentful matrix
             # categories:
             # - VP modifier: ((S\NP)\(S\NP))/NP
@@ -449,11 +457,18 @@ class Papfunc_SemanticNode(SemanticNode):
             # - copula argument: PP/NP
             # - adjective modifier: PP/NP
             else:
-                stringstructure.append(lempos + '.zeromat')
-                numericalstructure.append(zeromat)
+                if (lempos + '.subjmat') in matspace.row2id:
+                    stringstructure.append(lempos + '.subjmat')
+                    numericalstructure.append(matspace.get_row(lempos + '.subjmat'))
+                else:
+                    stringstructure.append(lempos + '.zeromat')
+                    numericalstructure.append(zeromat)
                 if lempos in matspace.row2id:
                     stringstructure.append(lempos + '.lexmat')
                     numericalstructure.append(matspace.get_row(lempos))
+                elif (lempos + '.objmat') in matspace.row2id:
+                    stringstructure.append(lempos + '.objmat')
+                    numericalstructure.append(matspace.get_row(lempos + '.objmat'))
                 else:
                     stringstructure.append(lempos + '.identmat')
                     numericalstructure.append(identmat)
@@ -469,16 +484,19 @@ class Papfunc_SemanticNode(SemanticNode):
         This method computes symbolic and numeric matrix representations od a 
         papfunc node, taking as input a vector space, a matrix space. An optional Boolean argument, if set to True, makes matrices to be multiplied rather than summed when both subconstituents have arity greater than 0.
         '''
-        # for terminal nodes call insert_terminal_node_representation
+        # for terminal nodes do lexical insertions by calling 
+        #insert_terminal_node_representation
         if self.is_terminal():
             matrep,temp_numrep=self.insert_terminal_node_representation(vecspace,matspace)
             self._matrep = matrep
             if temp_numrep[0] == "empty":
-                numrep = []
+                numrep = [] #default semantic representation for syntactic elements we ignore
             else:
                 numrep = [temp_numrep[0].transpose()]
                 dimensionality=(temp_numrep[0].shape[1])
                 if len(temp_numrep)>1:
+                    # Matrices are "flattened", stored as vectors.
+                    # We reshape each matrix to a normal shape (usually square)
                     for x in range(1, (len(temp_numrep))):
                         y = DenseMatrix(temp_numrep[x])
                         y.reshape((dimensionality,(y.shape[1]/dimensionality)))
@@ -499,21 +517,25 @@ class Papfunc_SemanticNode(SemanticNode):
             matrep2=self.get_child(1)._matrep
             if not matrep2:
                 raise ValueError("Empty matrix representation for node %s!" %self.get_child(1))
+            #get the arity of two daughter nodes in order to determine which of
+            #them is the function and which is the argument
             arity1=len(matrep1)-1
             arity2=len(matrep2)-1
             # first, compute symbolic matrix representation
             if arity1-arity2 == 0:
                 for x in range(0, arity1+1):
                     self._matrep.append('(' + matrep1[x] + '+' + matrep2[x] + ')')
+            #left application
             if arity1 < arity2 and not re.search('empty$',matrep2[0]) and not re.search('empty$',matrep1[0]):
                 for x in range(0, arity2):
-                    if x == 0:
+                    if x == 0: # compute vector of the mother node
                         self._matrep.append('(' + matrep2[x] + '+' + matrep2[arity2] + '*' + matrep1[x] + ')')
-                    elif x < len(matrep1):
+                    elif x < len(matrep1): # compute matrices of the mother node
                         if multiply_matrices: self._matrep.append('(' + matrep2[x] + '*' + matrep1[x] + ')')
                         else: self._matrep.append('(' + matrep2[x] + '+' + matrep1[x] + ')')
                     else:
                         self._matrep.append(matrep2[x])
+            #right application
             if arity1 > arity2 and not re.search('empty$',matrep2[0]) and not re.search('empty$',matrep1[0]):
                 for x in range(0, arity1):
                     if x == 0:
@@ -523,20 +545,27 @@ class Papfunc_SemanticNode(SemanticNode):
                         else: self._matrep.append('(' + matrep1[x] + '+' + matrep2[x] + ')')
                     else:
                         self._matrep.append(matrep1[x])
+        #if one of the daughters is 'empty' (marked to be ignored), ignore it
             if re.search('empty$',matrep1[0]):
                 self._matrep = matrep2
             if re.search('empty$',matrep2[0]):
                 self._matrep = matrep1
-            # computing numeric matrix representation of a node from those of its two daughters	
+            # computing numeric matrix representation of a node from those of 
+            # its two daughters.
+            # First, get arity of the daughters to establish the directionality
+            # of function application
             numrep1=self.get_child(0)._numrep
             numrep2=self.get_child(1)._numrep
             if arity1-arity2 == 0 and numrep1 and numrep2:
                 for x in range(0, arity1+1):
                     self._numrep.append(numrep1[x].__add__(numrep2[x]))
+            #left application
             if arity1 < arity2 and not numrep1==[] and not numrep2==[]:
                 for x in range(0, arity2):
+                    # compute the vector
                     if x == 0:
                         self._numrep.append(numrep2[x].__add__(numrep2[arity2] * numrep1[x]))
+                    # compute a matrix
                     elif x < len(numrep1):
                         if multiply_matrices:
                             self._numrep.append(numrep2[x] * numrep1[x])
@@ -544,6 +573,7 @@ class Papfunc_SemanticNode(SemanticNode):
                             self._numrep.append(numrep1[x].__add__(numrep2[x]))
                     else:
                         self._numrep.append(numrep2[x])
+            #right aplication
             if arity1 > arity2 and not numrep1==[] and not numrep2==[]:
                 for x in range(0, arity1):
                     if x == 0:
@@ -555,6 +585,7 @@ class Papfunc_SemanticNode(SemanticNode):
                             self._numrep.append(numrep1[x].__add__(numrep2[x]))
                     else:
                         self._numrep.append(numrep1[x])
+            # ignore 'empty' elements in composition
             if (numrep1 == []):
                 self._numrep = numrep2
             if (numrep2 == []):

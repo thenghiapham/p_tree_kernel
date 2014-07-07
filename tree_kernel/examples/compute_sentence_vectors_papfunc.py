@@ -8,8 +8,8 @@ from tree.semantic_node import SemanticNode
 from tree.syntactic_tree import SyntacticTree
 from composes.semantic_space.space import Space
 
-#this scripts takes 4 arguments: 
-#*directory of input xml files
+#this script takes 4 command line arguments: 
+#*directory of input xml files of parsed sentences (the script accepts the output of the C and C CCG parser)
 #*output file
 #*vector space prefix (for dm format)
 #*matrix spce prefix (for dm format)
@@ -17,8 +17,16 @@ from composes.semantic_space.space import Space
 if len(sys.argv)!=5: raise TypeError("The script takes exactly 4 arguments, %i given" %len(sys.argv))
 
 print("importing vectors...")
-vecfilepref = sys.argv[3]# e.g. "/mnt/cimec-storage-sata/users/denis.paperno/composition_grammar/papfunc_spaces/vectors_ppmi_svd_300_simplistic_training_nouns_only"
-matfilepref = sys.argv[4]# e.g. "/mnt/cimec-storage-sata/users/denis.paperno/composition_grammar/papfunc_spaces/matrices_ppmi_svd_300_simplistic_training"
+vecfilepref = sys.argv[3]
+
+# the third command line argument is the prefix of the vector space in dense matrix format
+# e.g. "/mnt/cimec-storage-sata/users/denis.paperno/composition_grammar/papfunc_spaces/vectors_ppmi_svd_300_simplistic_training_nouns_only"
+
+matfilepref = sys.argv[4]
+
+# the fourth command line argument is the prefix of the matrix space in dense matrix format
+# e.g. "/mnt/cimec-storage-sata/users/denis.paperno/composition_grammar/papfunc_spaces/matrices_ppmi_svd_300_simplistic_training"
+
 vecspace = Space.build(data = vecfilepref + ".dm",
                        rows = vecfilepref + ".rows",
                        format = "dm")
@@ -29,7 +37,7 @@ matspace = Space.build(data = matfilepref + ".dm",
                        format = "dm")
 
 for infile in os.listdir(sys.argv[1]):
- if (re.search (r'\.xml',infile)):
+ if (re.search (r'\.xml$',infile)):
   print("processing %s ..." %infile)
   outname=sys.argv[2]+"."+infile
   outfile= open(outname+".dm",'w')
