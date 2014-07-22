@@ -13,7 +13,8 @@ from composes.semantic_space.space import Space
 #*vector space prefix (for dm format)
 #*matrix spce prefix (for dm format)
 
-if len(sys.argv)!=5: raise TypeError("The script takes exactly 4 arguments, %i given" %len(sys.argv))
+if len(sys.argv)!=5:
+    raise TypeError("The script takes exactly 4 arguments, %i given" %len(sys.argv))
 
 print("importing vectors...")
 # the third command line argument is the prefix of the vector space in dense matrix format
@@ -29,14 +30,14 @@ matfilepref = sys.argv[4]
 
 #build the space of lexical vectors
 mvecspace = Space.build(data = vecfilepref + ".dm",
-                       rows = vecfilepref + ".rows",
-                       format = "dm")
+                                   rows = vecfilepref + ".rows",
+                                   format = "dm")
 
 print("importing matrices...")
 #build the space of lexical matrices
 mmatspace = Space.build(data = matfilepref + ".dm",
-                       rows = matfilepref + ".rows",
-                       format = "dm")
+                                   rows = matfilepref + ".rows",
+                                   format = "dm")
 
 infile = sys.argv[1]
 outfile= open(sys.argv[2],'w')
@@ -50,32 +51,32 @@ currtree=""
 intree=0 #indicator of whether we are inside a sentence tree or expect a new one
 
 #process the xml file with a list of sentences
- with open(infile) as data:
- for line in data:
-  if re.match("^<ccg>",line): :#beginning of tree routine
-   currtree = currtree + line
-   intree=1
-   sent +=1
-  elif re.match("^</ccg>",line): #end of tree routine
-   currtree = currtree + line
-   intree=0
-   try: #output the representations to file
-    syntactic_tree = SyntacticTree.parse_tree_from_xml_string(currtree)
-    succ +=1
-    # print top node 
-    semnode = SemanticNode.create_semantic_node(syntactic_tree.root,None)
-    papnode = Papfunc_SemanticNode.create_papfunc_node(semnode,vecspace,matspace)
-    #output the symbolic representation
-    print(papnode.get_matrep(),file=outfile)
-    vecs +=1
-   except ParseError: #invalid xml tree representation
-    "THIS TREE WAS NOT XML-PARSABLE: %s" %currtree
+with open(infile) as data:
+    for line in data:
+        if re.match("^<ccg>",line):#beginning of tree routine
+            currtree = currtree + line
+            intree=1
+            sent +=1
+        elif re.match("^</ccg>",line): #end of tree routine
+            currtree = currtree + line
+            intree=0
+            try: #output the representations to file
+                syntactic_tree = SyntacticTree.parse_tree_from_xml_string(currtree)
+                succ +=1
+                # print top node 
+                semnode = SemanticNode.create_semantic_node(syntactic_tree.root,None)
+                papnode = Papfunc_SemanticNode.create_papfunc_node(semnode,mvecspace,mmatspace)
+                #output the symbolic representation
+                print(papnode.get_matrep(),file=outfile)
+                vecs +=1
+            except ParseError: #invalid xml tree representation
+                "THIS TREE WAS NOT XML-PARSABLE: %s" %currtree
 
-   # reset current tree
-   currtree=""
+            # reset current tree
+            currtree=""
 
-  elif intree:
-   currtree = currtree + line
+        elif intree:
+            currtree = currtree + line
 #display sentence statistics for the current input file
 print("%i sentences transgressed" %sent)
 print("%i sentences successfully parsed" %succ)

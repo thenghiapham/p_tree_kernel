@@ -1,4 +1,4 @@
-from tree.papfunc_old import Papfunc_SemanticNode
+from tree.papfunc import Papfunc_SemanticNode
 from tree.semantic_node import SemanticNode
 from tree.syntactic_tree import SyntacticTree
 from composes.semantic_space.space import Space
