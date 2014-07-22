@@ -4,7 +4,7 @@ Created on Nov 2, 2013
 @author: pham
 '''
 
-import sys
+#import sys
 import numpy as np
 from os.path import exists
 
@@ -45,18 +45,15 @@ def train_one_space(core_space, per_space, func_pos, no_log_space):
 
 
 def train_all_spaces(core_space, an_dn_space, pn_space, sv_space, vo_space, cn_space, normed):
-    if normed:
-        print "normalizing core"
-        core_space = core_space.apply(RowNormalization())
-        #per_space = per_space.apply(RowNormalization())
+    core_space = core_space.apply(RowNormalization())
     print "train adj, det"
-    a_d_space = train_one_space(core_space, an_dn_space, 0, 3, normed)
+    a_d_space = train_one_space(core_space, an_dn_space, 0, 3)
     print "train prep"
-    prep_space = train_one_space(core_space, pn_space, 1, 3, normed)
+    prep_space = train_one_space(core_space, pn_space, 1, 3)
     print "train vo"
-    v_obj_space = train_one_space(core_space, vo_space, 0, 4, normed)
+    v_obj_space = train_one_space(core_space, vo_space, 0, 4)
     print "train sv"
-    v_subj_space = train_one_space(core_space, sv_space, 1, 4, normed)
+    v_subj_space = train_one_space(core_space, sv_space, 1, 4)
     
     new_v_obj_rows = [row + ".objmat" for row in v_obj_space.id2row]
     v_obj_space._id2row = new_v_obj_rows
@@ -76,12 +73,11 @@ def train_from_core(core_file, output_file_prefix):
     pn_file = core_file.replace("core","sick_pn")#.replace(".pkl",".dm")
     sv_file = core_file.replace("core","sick_sv")#.replace(".pkl",".dm")
     vo_file = core_file.replace("core","sick_vo")#.replace(".pkl",".dm")
-    cn_file = core_file.replace("core","sick_cn")#.replace(".pkl",".dm")
     
     if (not exists(core_file) or not exists(pn_file) or not exists(sv_file)
-        or not exists(vo_file) or not exists(an_dn_file) or not exists(cn_file)):
+        or not exists(vo_file) or not exists(an_dn_file)):
         print "some file doesn't exist"
-        print core_file, an_dn_file, pn_file, sv_file, vo_file#cn_file
+        print core_file, an_dn_file, pn_file, sv_file, vo_file
     
     print "load core"
     core_space = io_utils.load(core_file, Space)
@@ -95,16 +91,13 @@ def train_from_core(core_file, output_file_prefix):
     print "load vo"
     vo_space = io_utils.load(vo_file, Space)
     
-    print "training normed"
-    print "saving normed"
+    print "start training"
     all_mat_space_normed = train_all_spaces(core_space, an_dn_space, 
                                      pn_space, sv_space, vo_space,
                                      True)
-    print "exporting normed"
+    print "exporting trained file"
     all_mat_space_normed.export(output_file_prefix, format="dm")
     del all_mat_space_normed
-    print "DONE"
-    
     print "DONE"
     
 if __name__ == '__main__':
