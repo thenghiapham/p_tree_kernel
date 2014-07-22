@@ -1,0 +1,10 @@
+<ccg>
+ <rule type="fa" cat="NP[nb]">
+  <lf start="0" span="1" word="A" lemma="a" pos="DT" chunk="I-NP" entity="O" cat="NP[nb]/N" />
+  <rule type="fa" cat="N">
+   <lf start="1" span="1" word="dog" lemma="dog" pos="NN" chunk="I-NP" entity="O" cat="N/N" />
+   <lf start="2" span="1" word="barks" lemma="bark" pos="NNS" chunk="I-NP" entity="O" cat="N" />
+  </rule>
+ </rule>
+</ccg>
+'''

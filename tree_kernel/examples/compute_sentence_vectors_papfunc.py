@@ -13,11 +13,18 @@ from composes.semantic_space.space import Space
 # command line arguments:
 # - directory of input xml files of parsed sentences 
 #    (the script accepts the output of the C&C CCG parser)
-# - output file
-# - vector space prefix in dm format (i.e. without the file extension)
-# - matrix spce prefix in dm format (i.e. without the file extension)
+# - output file prefix (this prefix will be used to create the path to the
+#     symbolic and numeric vector output files)
+# - lexical vector space prefix in dm format (i.e. without the file extension)
+#     (you need to include both the dense matrix file (dm) and the rows file (.rows)
+# - matrix space prefix in dm format (i.e. without the file extension)
+#     This is the file that contains the trained matrices for adjs, verbs, etc. 
+#     (Again, you need to include both the dense matrix file (dm) and the rows file (.rows)   
+#
+# example:
+#    python compute_sentence_symbolic_representation.py resource/ resource/output.txt resource/vectors resource/matrices 
 
-if len(sys.argv)!=5: raise TypeError("The script takes exactly 4 arguments, %i given" %len(sys.argv))
+if len(sys.argv)!=5: raise TypeError("The script takes exactly 4 arguments, %i given" %(len(sys.argv) - 1))
 
 print("importing vectors...")
 
@@ -54,7 +61,7 @@ for infile in os.listdir(sys.argv[1]):
         intree=0
 
         #process each xml file in the input directory
-        with open(sys.argv[1]+infile) as data:
+        with open(sys.argv[1]+"/" + infile) as data:
             for line in data:
                 if re.match("^<ccg>",line):
                     currtree = currtree + line

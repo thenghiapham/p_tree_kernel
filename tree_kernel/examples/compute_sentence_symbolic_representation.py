@@ -12,12 +12,18 @@ from composes.semantic_space.space import Space
 #  - input xml file of parsed sentences
 #     (the script accepts the output of the C and C CCG parser)
 #  - output file
-#  - vector space prefix in dm format (i.e. without the file extension)
-#  - matrix spce prefix in dm format (i.e. without the file extension)
+#
+#  - lexical vector space prefix in dm format (i.e. without the file extension)
+#     (you need to include both the dense matrix file (dm) and the rows file (.rows)
+#  - matrix space prefix in dm format (i.e. without the file extension)
+#     This is the file that contains the trained matrices for adjs, verbs, etc. 
+#     (Again, you need to include both the dense matrix file (dm) and the rows file (.rows)    
 # 
+# example:
+#    python compute_sentence_symbolic_representation.py resource/test.xml resource/output.txt resource/vectors resource/matrices
 
 if len(sys.argv)!=5:
-    raise TypeError("The script takes exactly 4 arguments, %i given" %len(sys.argv))
+    raise TypeError("The script takes exactly 4 arguments, %i given" %(len(sys.argv) - 1))
 
 print("importing vectors...")
 
