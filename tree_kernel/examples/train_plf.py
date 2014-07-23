@@ -4,7 +4,7 @@ Created on Nov 2, 2013
 @author: pham
 '''
 
-#import sys
+import sys
 import numpy as np
 from os.path import exists
 
@@ -12,10 +12,8 @@ from composes.transformation.scaling.row_normalization import RowNormalization
 from composes.composition.lexical_function import LexicalFunction
 from composes.utils.regression_learner import RidgeRegressionLearner
 from composes.semantic_space.space import Space
-from composes.utils import io_utils
 from composes.utils.space_utils import list2dict
 
-from examples import lexical_space
 
 
 def get_training_list(observe_space, split_position, function_pos):
@@ -68,28 +66,24 @@ def train_all_spaces(core_space, an_dn_space, pn_space, sv_space, vo_space, cn_s
     all_mat_space = Space.vstack(v_subj_space, all_mat_space)
     return all_mat_space
 
-def train_from_core(core_file, output_file_prefix):
-    an_dn_file = core_file.replace("core","sick_an_dn")
-    pn_file = core_file.replace("core","sick_pn")#.replace(".pkl",".dm")
-    sv_file = core_file.replace("core","sick_sv")#.replace(".pkl",".dm")
-    vo_file = core_file.replace("core","sick_vo")#.replace(".pkl",".dm")
+def train_from_core(lexical_space_file, an_dn_file, pn_file, sv_file, vo_file, output_file_prefix):
     
-    if (not exists(core_file) or not exists(pn_file) or not exists(sv_file)
+    if (not exists(lexical_space_file) or not exists(pn_file) or not exists(sv_file)
         or not exists(vo_file) or not exists(an_dn_file)):
         print "some file doesn't exist"
-        print core_file, an_dn_file, pn_file, sv_file, vo_file
+        print lexical_space_file, an_dn_file, pn_file, sv_file, vo_file
     
     print "load core"
-    core_space = io_utils.load(core_file, Space)
+    core_space = Space.build(lexical_space_file, format="dm")
     print "load an dn"
     
-    an_dn_space = io_utils.load(an_dn_file, Space)
+    an_dn_space = Space.build(an_dn_file, format="dm")
     print "load pn"
-    pn_space = io_utils.load(pn_file, Space)
+    pn_space = Space.build(pn_file, format="dm")
     print "load sv"
-    sv_space = io_utils.load(sv_file, Space)
+    sv_space = Space.build(sv_file, format="dm")
     print "load vo"
-    vo_space = io_utils.load(vo_file, Space)
+    vo_space = Space.build(vo_file, format="dm")
     
     print "start training"
     all_mat_space_normed = train_all_spaces(core_space, an_dn_space, 
@@ -101,5 +95,12 @@ def train_from_core(core_file, output_file_prefix):
     print "DONE"
     
 if __name__ == '__main__':
-    
-    train_from_core(lexical_space)
+    args = sys.argv[1:]
+    if len(args) != 5:
+        print "The script takes exactly 5 arguments, %i given" %len(args)
+    lexical_space = args[0]
+    an_dn_file = args[1]
+    sv_file = args[2]
+    vo_file = args[3]
+    output_file_prefix = args[4]
+    train_from_core(lexical_space, an_dn_file, sv_file, vo_file, output_file_prefix)
