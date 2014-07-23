@@ -14,6 +14,17 @@ from composes.utils.regression_learner import RidgeRegressionLearner
 from composes.semantic_space.space import Space
 from composes.utils.space_utils import list2dict
 
+# This script serves as an example of how 
+# parser, stored in xml file (mainly for debuging). The script takes 4 command line arguments:
+#  - input xml file of parsed sentences
+#     (the script accepts the output of the C and C CCG parser)
+#  - output file
+#
+#  - lexical vector space prefix in dm format (i.e. without the file extension)
+#     (you need to include both the dense matrix file (dm) and the rows file (.rows)
+#  - matrix space prefix in dm format (i.e. without the file extension)
+#     This is the file that contains the trained matrices for adjs, verbs, etc. 
+#     (Again, you need to include both the dense matrix file (dm) and the rows file (.rows)    
 # example:
 #    python train_plf.py resource/sample_core.dm resource/sick_an_dn_pmi_svd50.dm resource/sick_pn_pmi_svd50.dm resource/sick_sv_pmi_svd50.dm resource/sick_vo_pmi_svd50.dm resource/sample_matrices
 
