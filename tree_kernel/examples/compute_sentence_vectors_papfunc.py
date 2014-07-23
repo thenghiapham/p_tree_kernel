@@ -3,10 +3,12 @@ import sys
 from xml.etree.ElementTree import ParseError
 import re
 import os
+import numpy as np
 from tree.papfunc import Papfunc_SemanticNode
 from tree.semantic_node import SemanticNode
 from tree.syntactic_tree import SyntacticTree
 from composes.semantic_space.space import Space
+from composes.matrix.dense_matrix import DenseMatrix
 
 # This script computes both the symbolic and numeric vector representations for 
 # sentences parsed by the C&C parser, stored in xml file. The script takes 4 
@@ -24,6 +26,24 @@ from composes.semantic_space.space import Space
 # example:
 #    python compute_sentence_symbolic_representation.py resource/ resource/output.txt resource/vectors resource/matrices 
 
+
+def add_one_zero_vector(core_space):
+    length = core_space.cooccurrence_matrix.shape[1]
+    zero_vector = np.zeros((1,length))
+    one_vector = np.ones((1,length))
+    matrix = DenseMatrix(np.vstack([zero_vector, one_vector]))
+    rows = ["cg.zerovec","cg.onevec"]
+    additional_space = Space(matrix, rows, [])
+    return Space.vstack(core_space, additional_space)
+    
+def add_zero_idenity_matrix(matrix_space, vector_length):
+    zero_mat = np.zeros((1,vector_length * vector_length))
+    identity_mat = np.reshape(np.eye(vector_length),(1, vector_length * vector_length))
+    matrix = DenseMatrix(np.vstack([zero_mat, identity_mat]))
+    rows = ["cg.zeromat","cg.identmat"]
+    additional_space = Space(matrix, rows, [])
+    return Space.vstack(matrix_space, additional_space)
+
 if len(sys.argv)!=5: raise TypeError("The script takes exactly 4 arguments, %i given" %(len(sys.argv) - 1))
 
 print("importing vectors...")
@@ -40,11 +60,13 @@ matfilepref = sys.argv[4]
 vecspace = Space.build(data = vecfilepref + ".dm",
                                             rows = vecfilepref + ".rows",
                                             format = "dm")
+vecspace = add_one_zero_vector(vecspace)
 
 print("importing matrices...")
 matspace = Space.build(data = matfilepref + ".dm",
                                             rows = matfilepref + ".rows",
                                             format = "dm")
+matspace = add_zero_idenity_matrix(matspace, vecspace.cooccurrence_matrix.shape[1])
 
 for infile in os.listdir(sys.argv[1]):
     if (re.search (r'\.xml$',infile)):

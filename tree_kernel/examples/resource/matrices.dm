@@ -7751,5 +7751,3 @@ Build-v.objmat	4	5	4	3	2	4	0	2	3
 Build-v.subjmat	1	2	0	1	0	3	4	1	3
 Bear-v.objmat	0	3	1	1	1	0	1	4	0
 Bear-v.subjmat	3	2	0	0	4	3	4	2	0
-cg.identmat	1	0	0	0	1	0	0	0	1
-cg.zeromat	0	0	0	0	0	0	0	0	0

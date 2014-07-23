@@ -18457,5 +18457,3 @@ ABB-n	4	4	5
 ABAR-n	1	2	0
 AAGM-n	1	4	2
 A'an-n	2	0	4
-cg.onevec	1	1	1
-cg.zerovec	0	0	0

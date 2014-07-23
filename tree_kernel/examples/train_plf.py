@@ -14,7 +14,8 @@ from composes.utils.regression_learner import RidgeRegressionLearner
 from composes.semantic_space.space import Space
 from composes.utils.space_utils import list2dict
 
-
+# example:
+#    python train_plf.py resource/sample_core.dm resource/sick_an_dn_pmi_svd50.dm resource/sick_pn_pmi_svd50.dm resource/sick_sv_pmi_svd50.dm resource/sick_vo_pmi_svd50.dm resource/sample_matrices
 
 def get_training_list(observe_space, split_position, function_pos):
     phrase_list = observe_space.id2row
@@ -42,7 +43,7 @@ def train_one_space(core_space, per_space, func_pos, no_log_space):
     return composition_model.function_space
 
 
-def train_all_spaces(core_space, an_dn_space, pn_space, sv_space, vo_space, cn_space, normed):
+def train_all_spaces(core_space, an_dn_space, pn_space, sv_space, vo_space):
     core_space = core_space.apply(RowNormalization())
     print "train adj, det"
     a_d_space = train_one_space(core_space, an_dn_space, 0, 3)
@@ -74,21 +75,20 @@ def train_from_core(lexical_space_file, an_dn_file, pn_file, sv_file, vo_file, o
         print lexical_space_file, an_dn_file, pn_file, sv_file, vo_file
     
     print "load core"
-    core_space = Space.build(lexical_space_file, format="dm")
+    core_space = Space.build(data=lexical_space_file, format="dm")
     print "load an dn"
     
-    an_dn_space = Space.build(an_dn_file, format="dm")
+    an_dn_space = Space.build(data=an_dn_file, format="dm")
     print "load pn"
-    pn_space = Space.build(pn_file, format="dm")
+    pn_space = Space.build(data=pn_file, format="dm")
     print "load sv"
-    sv_space = Space.build(sv_file, format="dm")
+    sv_space = Space.build(data=sv_file, format="dm")
     print "load vo"
-    vo_space = Space.build(vo_file, format="dm")
+    vo_space = Space.build(data=vo_file, format="dm")
     
     print "start training"
     all_mat_space_normed = train_all_spaces(core_space, an_dn_space, 
-                                     pn_space, sv_space, vo_space,
-                                     True)
+                                     pn_space, sv_space, vo_space)
     print "exporting trained file"
     all_mat_space_normed.export(output_file_prefix, format="dm")
     del all_mat_space_normed
@@ -96,11 +96,13 @@ def train_from_core(lexical_space_file, an_dn_file, pn_file, sv_file, vo_file, o
     
 if __name__ == '__main__':
     args = sys.argv[1:]
-    if len(args) != 5:
-        print "The script takes exactly 5 arguments, %i given" %len(args)
+    if len(args) != 6:
+        print "The script takes exactly 6 arguments, %i given" %len(args)
+        exit(1)
     lexical_space = args[0]
     an_dn_file = args[1]
-    sv_file = args[2]
-    vo_file = args[3]
-    output_file_prefix = args[4]
-    train_from_core(lexical_space, an_dn_file, sv_file, vo_file, output_file_prefix)
+    pn_file = args[2]
+    sv_file = args[3]
+    vo_file = args[4]
+    output_file_prefix = args[5]
+    train_from_core(lexical_space, an_dn_file, pn_file, sv_file, vo_file, output_file_prefix)

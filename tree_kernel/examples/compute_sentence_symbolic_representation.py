@@ -2,10 +2,13 @@ from __future__ import print_function
 import sys
 from xml.etree.ElementTree import ParseError
 import re
+import numpy as np
 from tree.papfunc import Papfunc_SemanticNode
 from tree.semantic_node import SemanticNode
 from tree.syntactic_tree import SyntacticTree
 from composes.semantic_space.space import Space
+from composes.matrix.dense_matrix import DenseMatrix
+
 
 # This script computes symbolic representations for sentences parsed by the C&C 
 # parser, stored in xml file (mainly for debuging). The script takes 4 command line arguments:
@@ -21,6 +24,26 @@ from composes.semantic_space.space import Space
 # 
 # example:
 #    python compute_sentence_symbolic_representation.py resource/test.xml resource/output.txt resource/vectors resource/matrices
+#    or
+#    python compute_sentence_symbolic_representation.py resource/SICK_sample.xml resource/sick_sample_output.txt resource/sample_core resource/sample_matrices
+
+def add_one_zero_vector(core_space):
+    length = core_space.cooccurrence_matrix.shape[1]
+    zero_vector = np.zeros((1,length))
+    one_vector = np.ones((1,length))
+    matrix = DenseMatrix(np.vstack([zero_vector, one_vector]))
+    rows = ["cg.zerovec","cg.onevec"]
+    additional_space = Space(matrix, rows, [])
+    return Space.vstack(core_space, additional_space)
+    
+def add_zero_idenity_matrix(matrix_space, vector_length):
+    zero_mat = np.zeros((1,vector_length * vector_length))
+    identity_mat = np.reshape(np.eye(vector_length),(1, vector_length * vector_length))
+    matrix = DenseMatrix(np.vstack([zero_mat, identity_mat]))
+    rows = ["cg.zeromat","cg.identmat"]
+    additional_space = Space(matrix, rows, [])
+    return Space.vstack(matrix_space, additional_space)
+
 
 if len(sys.argv)!=5:
     raise TypeError("The script takes exactly 4 arguments, %i given" %(len(sys.argv) - 1))
@@ -39,12 +62,14 @@ matfilepref = sys.argv[4]
 mvecspace = Space.build(data = vecfilepref + ".dm",
                                    rows = vecfilepref + ".rows",
                                    format = "dm")
+mvecspace = add_one_zero_vector(mvecspace)
 
 print("importing matrices...")
 #build the space of lexical matrices
 mmatspace = Space.build(data = matfilepref + ".dm",
                                    rows = matfilepref + ".rows",
                                    format = "dm")
+mmatspace = add_zero_idenity_matrix(mmatspace, mvecspace.cooccurrence_matrix.shape[1])
 
 infile = sys.argv[1]
 outfile= open(sys.argv[2],'w')
