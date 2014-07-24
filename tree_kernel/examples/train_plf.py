@@ -14,18 +14,27 @@ from composes.utils.regression_learner import RidgeRegressionLearner
 from composes.semantic_space.space import Space
 from composes.utils.space_utils import list2dict
 
-# This script serves as an example of how 
-# parser, stored in xml file (mainly for debuging). The script takes 4 command line arguments:
-#  - input xml file of parsed sentences
+# This script serves as an example of how to train the matrices for the practical
+# lexical function model (plf). Currently we are training matrices for determiners,
+# adjectives, nouns, and verbs (we train 2 separate matrices for a verb, object
+# matrix and subject matrix). All of the matrices are put into one space.
+# The script takes 6 command line arguments:
+#  - lexical vector space: the path to semantic space that contains single words' vectors
 #     (the script accepts the output of the C and C CCG parser)
-#  - output file
+#  - an_dn_file: the space that contains the observed vectors of the 
+#     determiner-noun phrases and adjective-noun phrases for training the matrices
+#     for determiners and adjectives
+#  - pn_file: the space that contains the observed vectors of the preposition-noun
+#     phrases for training the matrices for prepositions
+#  - sv_file: the space that contains the observed vectors of verb-noun pairs
+#     in subject-verb relationship to train the subject matrices for verbs 
+#  - vo_file: the space that contains the observed vectors of verb-noun pairs
+#     in verb-object relationship to train the object matrices for verbs
+#  - output_file_prefix: the file prefix (file path without the file extension)
+#     of the output file, where all the space that contains all the trained matrices
+#     will be stored 
 #
-#  - lexical vector space prefix in dm format (i.e. without the file extension)
-#     (you need to include both the dense matrix file (dm) and the rows file (.rows)
-#  - matrix space prefix in dm format (i.e. without the file extension)
-#     This is the file that contains the trained matrices for adjs, verbs, etc. 
-#     (Again, you need to include both the dense matrix file (dm) and the rows file (.rows)    
-# example:
+# example of how to use the script:
 #    python train_plf.py resource/sample_core.dm resource/sick_an_dn_pmi_svd50.dm resource/sick_pn_pmi_svd50.dm resource/sick_sv_pmi_svd50.dm resource/sick_vo_pmi_svd50.dm resource/sample_matrices
 
 def get_training_list(observe_space, split_position, function_pos):
@@ -43,8 +52,8 @@ def get_training_list(observe_space, split_position, function_pos):
     print training_list[0]
     return training_list
 
-def train_one_space(core_space, per_space, func_pos, no_log_space):
-    param_range = np.logspace(-1,1,no_log_space)
+def train_one_space(core_space, per_space, func_pos, number_of_lambdas):
+    param_range = np.logspace(-1,1,number_of_lambdas)
     training_list = get_training_list(per_space, 1, func_pos)
     per_space = per_space.apply(RowNormalization())
     composition_model = LexicalFunction(
